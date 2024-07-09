@@ -13,6 +13,11 @@ const organisateur_1 = require("./modules/organisateur");
 const organisateur_2 = require("./entities/organisateur");
 const ingredient_1 = require("./entities/ingredient");
 const ingredient_2 = require("./modules/ingredient");
+const dotenv = require("dotenv");
+const nourriture_1 = require("./modules/nourriture");
+const nourriture_2 = require("./entities/nourriture");
+dotenv.config();
+const { SUPABASE_HOST, SUPABASE_PORT, SUPABASE_USERNAME, SUPABASE_PASSWORD, SUPABASE_DATABASE } = process.env;
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -21,16 +26,17 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
-                host: 'localhost',
-                port: 5432,
-                username: 'postgres',
-                password: 'foufouloulou',
-                database: 'restaurant',
-                entities: [organisateur_2.Organisateur, ingredient_1.Ingredient],
+                host: SUPABASE_HOST,
+                port: parseInt(SUPABASE_PORT, 10),
+                username: SUPABASE_USERNAME,
+                password: SUPABASE_PASSWORD,
+                database: SUPABASE_DATABASE,
+                entities: [organisateur_2.Organisateur, ingredient_1.Ingredient, nourriture_2.Nourriture],
                 synchronize: true,
             }),
             organisateur_1.OrganisateurModule,
-            ingredient_2.IngredientModule
+            ingredient_2.IngredientModule,
+            nourriture_1.NourritureModule
         ],
     })
 ], AppModule);
