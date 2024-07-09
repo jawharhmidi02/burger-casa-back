@@ -12,5 +12,4 @@ export class Ingred_client_choix{
 
     @Column()
     quantite: string;
-
 }
