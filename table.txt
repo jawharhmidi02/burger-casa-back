@@ -1,6 +1,0 @@
-- ingredient(id, nom, disponible, photo)
-- nourriture(id, nom, prix, categorie, description, disponible, ingredient[], photo)
-- ingred_client_choix(id, id_ingredient, quantity)
-- client_nourriture(id, id_nourriture, ingred_client_choix[], demander_special)
-- commande(id, status, total, data_creation, nom_client, tel_client, adresse, client_nourriture[])
-- organisateur(id, nom_prenom, email, password, telephone, dialogues)
