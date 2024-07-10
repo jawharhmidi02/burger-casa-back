@@ -9,7 +9,7 @@ export class OrganisateurController {
   constructor(private readonly organisateurService: OrganisateurService) {}
 
   @Post()
-  create(@Body() organisateur: UpdateOrganisateurDto): Promise<CreateOrganisateurDto> {
+  create(@Body() organisateur: UpdateOrganisateurDto): Promise<Organisateur> {
     return this.organisateurService.create(organisateur);
   }
 
@@ -24,12 +24,12 @@ export class OrganisateurController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() organisateur: UpdateOrganisateurDto): Promise<CreateOrganisateurDto> {
+  update(@Param('id') id: string, @Body() organisateur: UpdateOrganisateurDto): Promise<Organisateur> {
     return this.organisateurService.update(id, organisateur);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<CreateOrganisateurDto> {
+  remove(@Param('id') id: string): Promise<Organisateur> {
     return this.organisateurService.remove(id);
   }
 }

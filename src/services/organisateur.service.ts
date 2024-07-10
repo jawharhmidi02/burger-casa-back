@@ -10,18 +10,13 @@ export class OrganisateurService {
 
   constructor(
     @InjectRepository(Organisateur)
-    private organisateurRepository: Repository<Organisateur>,
+    private organisateurRepository: Repository<Organisateur>
   ) {}
 
-  async create(organisateur: UpdateOrganisateurDto): Promise<CreateOrganisateurDto> {
+  async create(organisateur: UpdateOrganisateurDto): Promise<Organisateur> {
     try{
       const response = await this.organisateurRepository.save(organisateur);
-      const data = new CreateOrganisateurDto();
-      for (let [key, value] of Object.keys(data)) {
-        data[key] = response[key]        
-      }
-
-      return data;
+      return response;
     }
     catch(error){
       console.log(error);
@@ -32,17 +27,10 @@ export class OrganisateurService {
   async findAll(): Promise<CreateOrganisateurDto[]>{
     try{
       const response = await this.organisateurRepository.find();
-      const data = new Array<CreateOrganisateurDto>(response.length);
-
-      for (let i = 0; i < response.length; i++) {
-        data[i] = new CreateOrganisateurDto();
-        for (let [key, value] of Object.keys(data[i])) {
-          data[i][key] = response[i][key]        
-        }
       
-      }
       
-      return data;
+      
+      return response;
     }
     catch(error){
       console.log(error);
@@ -63,16 +51,14 @@ export class OrganisateurService {
     }
   }
 
-  async update(id: string, organisateur: UpdateOrganisateurDto): Promise<CreateOrganisateurDto> {
+  async update(id: string, organisateur: UpdateOrganisateurDto): Promise<Organisateur> {
     try{
       const updatingData = new Organisateur();
       Object.assign(updatingData, organisateur);
       await this.organisateurRepository.update(id, updatingData);
       
       const response = await this.organisateurRepository.findOne({ where: { id }});
-      const findData = new CreateOrganisateurDto();
-      Object.assign(findData, response);
-      return findData;
+      return response;
     }
     catch(error){
       console.log(error);
@@ -80,13 +66,11 @@ export class OrganisateurService {
     }
   }
 
-  async remove(id: string): Promise<CreateOrganisateurDto> {
+  async remove(id: string): Promise<Organisateur> {
     try{
       const response = await this.organisateurRepository.findOne({ where: { id }});
       await this.organisateurRepository.delete(id);
-      const data = new CreateOrganisateurDto();
-      Object.assign(data, response);
-      return data;
+      return response;
     }
     catch(error){
       console.log(error);
