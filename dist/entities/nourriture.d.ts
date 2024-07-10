@@ -1,4 +1,4 @@
-import { Ingredient } from "./ingredient";
+import { Ingredient } from "../ingredient/entities/ingredient.entity";
 export declare class Nourriture {
     id: string;
     nom: string;

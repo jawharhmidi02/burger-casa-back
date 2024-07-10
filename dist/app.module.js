@@ -8,20 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const organisateur_1 = require("./modules/organisateur");
-const ingredient_1 = require("./modules/ingredient");
-const nourriture_1 = require("./modules/nourriture");
 const connect_1 = require("./modules/connect");
+const ingredient_module_1 = require("./modules/ingredient.module");
+const nourriture_module_1 = require("./modules/nourriture.module");
+const organisateur_module_1 = require("./modules/organisateur.module");
+const ingred_client_choix_module_1 = require("./modules/ingred_client_choix.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            ingred_client_choix_module_1.IngredClientChoixModule,
             connect_1.ConnectModule,
-            organisateur_1.OrganisateurModule,
-            ingredient_1.IngredientModule,
-            nourriture_1.NourritureModule
+            ingredient_module_1.IngredientModule,
+            nourriture_module_1.NourritureModule,
+            organisateur_module_1.OrganisateurModule,
         ],
     })
 ], AppModule);

@@ -11,9 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NourritureController = void 0;
-const nourriture_1 = require("../entities/nourriture");
+const nourriture_1 = require("src/entities/nourriture");
 const nourriture_2 = require("../services/nourriture");
 const common_1 = require("@nestjs/common");
 let NourritureController = class NourritureController {
@@ -47,7 +48,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [nourriture_1.Nourriture]),
+    __metadata("design:paramtypes", [typeof (_a = typeof nourriture_1.Nourriture !== "undefined" && nourriture_1.Nourriture) === "function" ? _a : Object]),
     __metadata("design:returntype", Promise)
 ], NourritureController.prototype, "create", null);
 __decorate([
@@ -82,7 +83,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, nourriture_1.Nourriture]),
+    __metadata("design:paramtypes", [String, typeof (_b = typeof nourriture_1.Nourriture !== "undefined" && nourriture_1.Nourriture) === "function" ? _b : Object]),
     __metadata("design:returntype", Promise)
 ], NourritureController.prototype, "update", null);
 __decorate([

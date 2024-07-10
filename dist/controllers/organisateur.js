@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrganisateurController = void 0;
 const common_1 = require("@nestjs/common");
@@ -41,7 +42,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [organisateur_2.Organisateur]),
+    __metadata("design:paramtypes", [typeof (_b = typeof organisateur_2.Organisateur !== "undefined" && organisateur_2.Organisateur) === "function" ? _b : Object]),
     __metadata("design:returntype", Promise)
 ], OrganisateurController.prototype, "create", null);
 __decorate([
@@ -62,7 +63,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, organisateur_2.Organisateur]),
+    __metadata("design:paramtypes", [String, typeof (_c = typeof organisateur_2.Organisateur !== "undefined" && organisateur_2.Organisateur) === "function" ? _c : Object]),
     __metadata("design:returntype", Promise)
 ], OrganisateurController.prototype, "update", null);
 __decorate([
@@ -74,6 +75,6 @@ __decorate([
 ], OrganisateurController.prototype, "remove", null);
 exports.OrganisateurController = OrganisateurController = __decorate([
     (0, common_1.Controller)('organisateurs'),
-    __metadata("design:paramtypes", [organisateur_1.OrganisateurService])
+    __metadata("design:paramtypes", [typeof (_a = typeof organisateur_1.OrganisateurService !== "undefined" && organisateur_1.OrganisateurService) === "function" ? _a : Object])
 ], OrganisateurController);
 //# sourceMappingURL=organisateur.js.map

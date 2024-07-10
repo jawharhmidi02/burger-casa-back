@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Nourriture = void 0;
 const typeorm_1 = require("typeorm");
-const ingredient_1 = require("./ingredient");
+const ingredient_entity_1 = require("../ingredient/entities/ingredient.entity");
 let Nourriture = class Nourriture {
 };
 exports.Nourriture = Nourriture;
@@ -44,7 +44,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], Nourriture.prototype, "disponible", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => ingredient_1.Ingredient),
+    (0, typeorm_1.ManyToMany)(() => ingredient_entity_1.Ingredient),
     (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], Nourriture.prototype, "ingredients", void 0);

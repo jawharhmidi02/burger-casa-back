@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ingred_client_choix = void 0;
 const typeorm_1 = require("typeorm");
-const ingredient_1 = require("./ingredient");
+const ingredient_entity_1 = require("../ingredient/entities/ingredient.entity");
 let Ingred_client_choix = class Ingred_client_choix {
 };
 exports.Ingred_client_choix = Ingred_client_choix;
@@ -20,9 +20,9 @@ __decorate([
     __metadata("design:type", String)
 ], Ingred_client_choix.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => ingredient_1.Ingredient, ingredient => ingredient.id),
+    (0, typeorm_1.ManyToOne)(() => ingredient_entity_1.Ingredient, ingredient => ingredient.id),
     (0, typeorm_1.JoinColumn)({ name: 'id_ingredient' }),
-    __metadata("design:type", ingredient_1.Ingredient)
+    __metadata("design:type", ingredient_entity_1.Ingredient)
 ], Ingred_client_choix.prototype, "id_ingredient", void 0);
 __decorate([
     (0, typeorm_1.Column)(),

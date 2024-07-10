@@ -9,9 +9,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.NourritureModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const nourriture_1 = require("../controllers/nourriture");
-const nourriture_2 = require("../entities/nourriture");
-const nourriture_3 = require("../services/nourriture");
+const nourriture_1 = require("src/controllers/nourriture");
+const nourriture_2 = require("src/entities/nourriture");
+const nourriture_3 = require("src/services/nourriture");
 let NourritureModule = class NourritureModule {
 };
 exports.NourritureModule = NourritureModule;

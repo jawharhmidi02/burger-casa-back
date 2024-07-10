@@ -14,7 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NourritureService = void 0;
 const typeorm_1 = require("typeorm");
-const nourriture_1 = require("../entities/nourriture");
+const nourriture_1 = require("src/entities/nourriture");
 const common_1 = require("@nestjs/common");
 const typeorm_2 = require("@nestjs/typeorm");
 let NourritureService = class NourritureService {

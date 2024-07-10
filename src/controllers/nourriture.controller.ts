@@ -1,17 +1,15 @@
-import { Nourriture } from "src/entities/nourriture";
-import { NourritureService } from "src/services/nourriture";
-import { Body, Controller, Post, Get, Param, Put, Delete } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { NourritureService } from '../services/nourriture.service';
+import { CreateNourritureDto } from '../dto/create-nourriture.dto';
+import { UpdateNourritureDto } from '../dto/update-nourriture.dto';
+import { Nourriture } from '../entities/nourriture.entity';
 
 @Controller('nourritures')
-export class NourritureController{
-    
-    constructor(
-        private readonly nourritureService: NourritureService
-    ){}
+export class NourritureController {
+  constructor(private readonly nourritureService: NourritureService) {}
 
-    @Post()
-    create(@Body() nourriture: Nourriture): Promise<Nourriture>{
+  @Post()
+    create(@Body() nourriture: CreateNourritureDto): Promise<Nourriture>{
         return this.nourritureService.create(nourriture);
     }
 
@@ -36,7 +34,7 @@ export class NourritureController{
     }
 
     @Put(':id')
-    update(@Param('id') id: string, @Body() nourriture: Nourriture): Promise<Nourriture>{
+    update(@Param('id') id: string, @Body() nourriture: UpdateNourritureDto): Promise<Nourriture>{
         return this.nourritureService.update(id, nourriture);
     }
 
@@ -44,6 +42,4 @@ export class NourritureController{
     delete(@Param('id') id: string): Promise<Nourriture>{
         return this.nourritureService.delete(id);
     }
-
 }
-

@@ -1,15 +1,19 @@
 import { Module } from '@nestjs/common';
-import { OrganisateurModule } from './modules/organisateur';
-import { IngredientModule } from './modules/ingredient';
-import { NourritureModule } from './modules/nourriture';
 import { ConnectModule } from 'src/modules/connect';
+import { IngredientModule } from './modules/ingredient.module';
+import { NourritureModule } from './modules/nourriture.module';
+import { OrganisateurModule } from './modules/organisateur.module';
+import { IngredClientChoixModule } from './modules/ingred_client_choix.module';
 
 @Module({
   imports: [
+    IngredClientChoixModule,
     ConnectModule,
-    OrganisateurModule,
     IngredientModule,
-    NourritureModule
+    NourritureModule,
+    OrganisateurModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  
+}

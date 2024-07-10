@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Ingredient } from "./ingredient";
+import { Ingredient } from "./ingredient.entity";
 
 @Entity()
-export class Ingred_client_choix{
+export class IngredClientChoix{
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
