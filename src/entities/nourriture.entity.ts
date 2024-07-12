@@ -24,7 +24,7 @@ export class Nourriture{
     @Column()
     disponible: boolean;
 
-    @ManyToMany(() => Ingredient )
+    @ManyToMany(() => Ingredient, ingredient => ingredient.id ,{onDelete: 'CASCADE'})
     @JoinTable()
     ingredients: Ingredient[];
 }

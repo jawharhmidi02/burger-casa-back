@@ -6,7 +6,7 @@ export class IngredClientChoix{
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @ManyToOne(() => Ingredient, ingredient => ingredient.id)
+    @ManyToOne(() => Ingredient, ingredient => ingredient.id, {onDelete: 'CASCADE'})
     @JoinColumn({ name: 'id_ingredient'})
     id_ingredient: Ingredient;
 

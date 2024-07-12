@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CreateIngredClientChoixDto } from '../dto/create-ingred_client_choix.dto';
-import { UpdateIngredClientChoixDto } from '../dto/update-ingred_client_choix.dto';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { IngredClientChoix } from '../entities/ingred_client_choix.entity';
+import { IngredClientChoixFromEntity } from 'src/dto/ingred_client_choix.dto';
+import { IngredClientChoixToEntity } from 'src/dto/ingred_client_choix.dto';
+import { JwtService } from '@nestjs/jwt';
+import { jwtConstants } from 'src/constants/jwt.constant';
 
 @Injectable()
 export class IngredClientChoixService {
@@ -12,60 +14,91 @@ export class IngredClientChoixService {
     private Ingred_client_choixRepository: Repository<IngredClientChoix>
   ){}
 
-  async create(ingred_client_choix: CreateIngredClientChoixDto): Promise<IngredClientChoix>{
+  async create(ingredClientChoix: IngredClientChoixToEntity): Promise<IngredClientChoixFromEntity>{
     try {
-      const data = new IngredClientChoix();
-      Object.assign(data, ingred_client_choix);
-      const response = await this.Ingred_client_choixRepository.save(data);
+      const response = await this.Ingred_client_choixRepository.save(ingredClientChoix);
+
+      const data = new IngredClientChoixFromEntity(response);
       
-      return response;
+      return data;
     } catch (error) {
       console.log(error);
+
       return null;
     }
   }
 
-  async findAll(): Promise<IngredClientChoix[]>{
+  async findAll(): Promise<IngredClientChoixFromEntity[]>{
     try {
-      const response = await this.Ingred_client_choixRepository.find();
-      return response;
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  }
+      const response = await this.Ingred_client_choixRepository.find({
+        relations: ['id_ingredient']
+      });
 
-  async findOne(id: string): Promise<IngredClientChoix>{
-    try {
-      const response = await this.Ingred_client_choixRepository.findOne({where: {id}})
-    } catch (error) {
+      const data = new Array<IngredClientChoixFromEntity>(response.length);
 
-      console.log(error);
-      return null;
-    }
-  }
-
-  async update(id: string, updateIngredClientChoixDto: CreateIngredClientChoixDto): Promise<IngredClientChoix>{
-    try {
-      const data = new IngredClientChoix();
-      Object.assign(data, updateIngredClientChoixDto);
-      await this.Ingred_client_choixRepository.update(id, data);
-      const response = await this.Ingred_client_choixRepository.findOne({where: {id}});
+      for (let i = 0; i < response.length; i++) {
+        data[i] = new IngredClientChoixFromEntity(response[i]);
+      }
 
       return response;
     } catch (error) {
       console.log(error);
+
+      return null;
+    }
+  }
+
+  async findOne(id: string): Promise<IngredClientChoixFromEntity>{
+    try {
+      const response = await this.Ingred_client_choixRepository.findOne({
+        where: {id},
+        relations: ['id_ingredient']  
+      });
+
+      const data = new IngredClientChoixFromEntity(response);
+      
+      return data;
+    } catch (error) {
+      console.log(error);
+
+      return null;
+    }
+  }
+
+  async update(id: string, ingredClientChoix: IngredClientChoixToEntity): Promise<IngredClientChoixFromEntity>{
+    try {
+      await this.Ingred_client_choixRepository.update(id, ingredClientChoix);
+
+      const response = await this.Ingred_client_choixRepository.findOne({
+        where: {id},
+        relations: ['id_ingredient']  
+      });
+
+      const data = new IngredClientChoixFromEntity(response);
+      
+      return data;
+    } catch (error) {
+      console.log(error);
+      
       return null
     }
   }
 
-  async delete(id: string): Promise<IngredClientChoix>{
+  async delete(id: string): Promise<IngredClientChoixFromEntity>{
     try {
-      const response = await this.Ingred_client_choixRepository.findOne({where: {id}});
+      const response = await this.Ingred_client_choixRepository.findOne({
+        where: {id},
+        relations: ['id_ingredient']  
+      });
+
       await this.Ingred_client_choixRepository.delete(id);
-      return response;
+
+      const data = new IngredClientChoixFromEntity(response);
+      
+      return data;
     } catch (error) {
       console.log(error);
+
       return null;
     }
   }

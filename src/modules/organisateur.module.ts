@@ -3,9 +3,18 @@ import { OrganisateurService } from '../services/organisateur.service';
 import { OrganisateurController } from '../controllers/organisateur.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Organisateur } from '../entities/organisateur.entity';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from 'src/constants/jwt.constant';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Organisateur])],
+  imports: [
+    TypeOrmModule.forFeature([Organisateur]),
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '7d' },
+    }),
+  ],
   controllers: [OrganisateurController],
   providers: [OrganisateurService],
 })

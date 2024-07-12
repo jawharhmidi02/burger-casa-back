@@ -1,25 +1,30 @@
 import { Injectable } from '@nestjs/common';
-import { CreateIngredientDto } from '../dto/create-ingredient.dto';
-import { UpdateIngredientDto } from '../dto/update-ingredient.dto';
 import { Ingredient } from '../entities/ingredient.entity';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Like, Repository } from "typeorm";
+import { IngredientFromEntity } from 'src/dto/ingredient.dto';
+import { IngredientToEntity } from 'src/dto/ingredient.dto';
+import { jwtConstants } from 'src/constants/jwt.constant';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class IngredientService {
 
   constructor(
     @InjectRepository(Ingredient)
-    private ingredientRepository: Repository<Ingredient>
+    private ingredientRepository: Repository<Ingredient>,
+    private jwtService: JwtService
   ){}
 
-  async create(createIngredientDto: CreateIngredientDto): Promise<Ingredient> {
+  async create(ingredient: IngredientToEntity, access_token: string): Promise<IngredientFromEntity> {
     try{
-      const data = new Ingredient();        
-      Object.assign(data, createIngredientDto)
+      const payLoad = await this.jwtService.verifyAsync(access_token,{ secret: jwtConstants.secret});
 
-      const response = await this.ingredientRepository.save(data);
-      return response;
+      const response = await this.ingredientRepository.save(ingredient);
+      
+      const data = new IngredientFromEntity(response); 
+
+      return data;
     }
     catch(error){
       console.log(error);
@@ -27,10 +32,19 @@ export class IngredientService {
     }
   }
 
-  async findAll(): Promise<Ingredient[]>{
+  async findAll(): Promise<IngredientFromEntity[]>{
     try{
         const response = await this.ingredientRepository.find();
-        return response;
+
+        const data = new Array<IngredientFromEntity>(response.length);
+
+        for (let i = 0; i < response.length; i++) {
+          
+          data[i] = new IngredientFromEntity(response[i]);
+          
+        }
+
+        return data;
     }
     catch(error){
         console.log(error);
@@ -38,10 +52,13 @@ export class IngredientService {
     }
   }
 
-  async findById(id: string): Promise<Ingredient> {
+  async findById(id: string): Promise<IngredientFromEntity> {
     try{
       const response = await this.ingredientRepository.findOne({ where: { id } });
-      return response;
+      
+      const data = new IngredientFromEntity(response); 
+
+      return data;
     }
     catch(error){
       console.log(error);
@@ -49,10 +66,18 @@ export class IngredientService {
     }
   }
 
-  async findByNom(nom: string): Promise<Ingredient[]> {
+  async findByNom(nom: string): Promise<IngredientFromEntity[]> {
     try{
       const response = await this.ingredientRepository.find({ where: { nom: Like(`%${nom}%`) } });
-      return response;
+
+      const data = new Array<IngredientFromEntity>(response.length);
+
+      for (let i = 0; i < response.length; i++) {
+        data[i] = new IngredientFromEntity(response[i]);
+        
+      }
+
+      return data;
     }
     catch(error){
       console.log(error);
@@ -60,14 +85,17 @@ export class IngredientService {
     }
   }
 
-  async update(id: string, updateIngredientDto: UpdateIngredientDto): Promise<Ingredient> {
+  async update(id: string, ingredient: IngredientToEntity, access_token: string): Promise<IngredientFromEntity> {
     try{
-      const data = new Ingredient();
-      Object.assign(data, updateIngredientDto)
+      const payLoad = await this.jwtService.verifyAsync(access_token,{ secret: jwtConstants.secret});
 
-      await this.ingredientRepository.update(id, data);
+      await this.ingredientRepository.update(id, ingredient);
+
       const response = await this.ingredientRepository.findOne({ where: { id } });
-      return response;
+      
+      const data = new IngredientFromEntity(response); 
+
+      return data;
     }
     catch(error){
       console.log(error);
@@ -75,11 +103,16 @@ export class IngredientService {
     }
   }
 
-  async delete(id: string): Promise<Ingredient> {
+  async delete(id: string, access_token: string): Promise<IngredientFromEntity> {
     try{
+      const payLoad = await this.jwtService.verifyAsync(access_token,{ secret: jwtConstants.secret});
+
       const response = await this.ingredientRepository.findOne({ where: { id } });
       await this.ingredientRepository.delete(id);
-      return response;
+      
+      const data = new IngredientFromEntity(response); 
+
+      return data;
     }
     catch(error){
       console.log(error);
