@@ -1,5 +1,4 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { ClientNourriture } from "./client_nourriture.entity";
 
 @Entity()
 export class Commande{
@@ -24,7 +23,6 @@ export class Commande{
     @Column()
     adresse: string;
 
-    @ManyToMany(() => ClientNourriture, clientNourriture => clientNourriture.id, {onDelete: 'CASCADE'} )
-    @JoinTable()
-    client_nourriture: ClientNourriture[];
+    @Column()
+    content: string;
 }

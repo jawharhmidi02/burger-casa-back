@@ -4,8 +4,6 @@ import { Module } from '@nestjs/common';
 import { Ingredient } from '../entities/ingredient.entity';
 import { Nourriture } from 'src/entities/nourriture.entity';
 import { Organisateur } from 'src/entities/organisateur.entity';
-import { IngredClientChoix } from 'src/entities/ingred_client_choix.entity';
-import { ClientNourriture } from 'src/entities/client_nourriture.entity';
 import { Commande } from "src/entities/commande.entity";
 
 dotenv.config();
@@ -24,7 +22,7 @@ const {
             username: SUPABASE_USERNAME,
             password: SUPABASE_PASSWORD,
             database: SUPABASE_DATABASE,
-            entities: [Ingredient, Nourriture, Organisateur, IngredClientChoix, ClientNourriture, Commande],
+            entities: [Ingredient, Nourriture, Organisateur, Commande],
             synchronize: true,
         })
     ]

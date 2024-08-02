@@ -23,9 +23,9 @@ export class NourritureController {
         return this.nourritureService.findById(id);
     }
 
-    @Get('/byname/:nom')
-    findByNom(@Param('nom') nom: string): Promise<NourritureFromEntity[]>{
-        return this.nourritureService.findByNom(nom);
+    @Get('/byname/:name')
+    findByNom(@Param('name') name: string): Promise<NourritureFromEntity[]>{
+        return this.nourritureService.findByNom(name);
     }
 
     @Get('/bycategorie/:categorie')

@@ -37,7 +37,7 @@ export class OrganisateurController {
     return this.organisateurService.update(email, password, organisateur, access_token);
   }
 
-  @Delete(':id')
+  @Delete(':email&:password')
   remove(@Param('email') email: string, @Param('password') password: string, @Headers('access_token') access_token: string): Promise<OrganisateurFromEntity> {
     return this.organisateurService.remove(email, password, access_token);
   }

@@ -1,4 +1,3 @@
-import { ClientNourriture } from "src/entities/client_nourriture.entity";
 import { Commande } from "src/entities/commande.entity";
 
 export class CommandeToEntity{
@@ -9,10 +8,10 @@ export class CommandeToEntity{
     nom_client: string;
 
     tel_client: string;
-
+    
     adresse: string;
 
-    client_nourriture: ClientNourriture[];
+    content: string;
 }
 
 export class CommandeFromEntity{
@@ -30,16 +29,16 @@ export class CommandeFromEntity{
 
     adresse: string;
 
-    client_nourriture: ClientNourriture[];
+    content: string;
 
     constructor(commande: Commande){
         this.adresse = commande.adresse;
-        this.client_nourriture = commande.client_nourriture;
         this.data_creation = commande.data_creation;
         this.id = commande.id;
         this.nom_client = commande.nom_client;
         this.status = commande.status;
         this.tel_client = commande.tel_client;
-        this.total = commande.total
+        this.total = commande.total;
+        this.content = commande.content;
     }
 }

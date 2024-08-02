@@ -71,23 +71,9 @@ export class CommandeService{
         try {
             const payLoad = await this.jwtService.verifyAsync(access_token,{ secret: jwtConstants.secret});
 
-            if(commande.client_nourriture){
-                const search = await this.commandeRepository.findOne({
-                    where: {id},
-                    relations: ['client_nourriture']
-                })   
-                
-                Object.assign(search, commande);
-                
-                await this.commandeRepository.save(search);
-                
-            }else{
-                await this.commandeRepository.update(id, commande);
-            }
-            const response = await this.commandeRepository.findOne({
-                where: {id},
-                relations: ['client_nourriture']
-            })
+            await this.commandeRepository.update(id, commande);
+
+            const response = await this.commandeRepository.findOne({where: {id}})
 
             const data = new CommandeFromEntity(response);
 
