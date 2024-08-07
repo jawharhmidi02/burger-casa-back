@@ -21,8 +21,17 @@ export class Commande{
     tel_client: string;
 
     @Column()
+    email_client: string;
+
+    @Column()
     adresse: string;
 
     @Column()
+    order_type: string;
+
+    @Column()
     content: string;
+
+    @Column({nullable: true})
+    special_request: string;
 }

@@ -12,6 +12,12 @@ export class CommandeToEntity{
     adresse: string;
 
     content: string;
+
+    email_client: string;
+
+    order_type: string;
+
+    special_request: string;
 }
 
 export class CommandeFromEntity{
@@ -31,6 +37,12 @@ export class CommandeFromEntity{
 
     content: string;
 
+    email_client: string;
+
+    order_type: string;
+
+    special_request: string;
+
     constructor(commande: Commande){
         this.adresse = commande.adresse;
         this.data_creation = commande.data_creation;
@@ -40,5 +52,8 @@ export class CommandeFromEntity{
         this.tel_client = commande.tel_client;
         this.total = commande.total;
         this.content = commande.content;
+        this.email_client = commande.email_client;
+        this.order_type = commande.order_type;
+        this.special_request = commande.special_request;
     }
 }

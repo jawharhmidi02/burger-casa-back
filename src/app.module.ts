@@ -4,6 +4,8 @@ import { IngredientModule } from './modules/ingredient.module';
 import { NourritureModule } from './modules/nourriture.module';
 import { OrganisateurModule } from './modules/organisateur.module';
 import { CommandeModule } from './modules/commande.module';
+import { ClientSuggestionModule } from './modules/client_suggestion.module';
+import { WhatsappMessageModule } from './modules/whatsapp_message.module';
 
 @Module({
   imports: [
@@ -11,7 +13,9 @@ import { CommandeModule } from './modules/commande.module';
     IngredientModule,
     NourritureModule,
     OrganisateurModule,
-    CommandeModule
+    CommandeModule,
+    ClientSuggestionModule,
+    WhatsappMessageModule
   ],
 })
 export class AppModule {

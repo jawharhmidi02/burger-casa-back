@@ -5,6 +5,8 @@ import { Ingredient } from '../entities/ingredient.entity';
 import { Nourriture } from 'src/entities/nourriture.entity';
 import { Organisateur } from 'src/entities/organisateur.entity';
 import { Commande } from "src/entities/commande.entity";
+import { ClientSuggestion } from 'src/entities/client_suggestion.entity';
+import { WhatsappMessage } from 'src/entities/whatsapp_message.entity';
 
 dotenv.config();
 
@@ -22,7 +24,7 @@ const {
             username: SUPABASE_USERNAME,
             password: SUPABASE_PASSWORD,
             database: SUPABASE_DATABASE,
-            entities: [Ingredient, Nourriture, Organisateur, Commande],
+            entities: [Ingredient, Nourriture, Organisateur, Commande, ClientSuggestion, WhatsappMessage],
             synchronize: true,
         })
     ]
