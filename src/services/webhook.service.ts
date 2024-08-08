@@ -34,25 +34,12 @@ export class WebHookService {
             message.context.id,
           );
 
-          //   const exist = await axios({
-          //     method: 'GET',
-          //     url: `${BACKEND_URL}/whatsapp_messages/bymessageid/${message.context.id}`,
-          //     headers: {
-          //       'ngrok-skip-browser-warning': 'true',
-          //     },
-          //   });
-
           const exist = await this.whatsappMessageService.findByMessageId(
             message.context.id,
           );
 
           if (exist != null) {
             const keyword = message.text.body.trim().toLowerCase();
-
-            // const order = await axios({
-            //   method: 'GET',
-            //   url: `${BACKEND_URL}/commandes/${exist.data.commande_id}`,
-            // });
 
             const order = await this.commandeService.findById(
               exist.commande_id,
@@ -83,17 +70,6 @@ export class WebHookService {
                 return;
             }
 
-            // const responseData = await axios({
-            //   method: 'PUT',
-            //   url: `${BACKEND_URL}/commandes/${exist.data.commande_id}`,
-            //   headers: {
-            //     whatsapp_api_key: WHATSAPP_API_KEY,
-            //   },
-            //   data: {
-            //     status: newStatus,
-            //   },
-            // });
-
             const response = await this.commandeService.update(
               exist.commande_id,
               { status: newStatus },
@@ -101,7 +77,6 @@ export class WebHookService {
               WHATSAPP_API_KEY,
             );
 
-            // Send WhatsApp notification
             const content = `New Order:\n- Name: ${
               response.nom_client
             }\n- Phone: ${response.tel_client}\n- Address: ${
@@ -129,7 +104,7 @@ export class WebHookService {
                 },
                 to: message.from,
                 context: {
-                  message_id: message.id, // shows the message as a reply to the original user message
+                  message_id: message.id,
                 },
               },
             });
@@ -141,15 +116,6 @@ export class WebHookService {
 
             const WhatsappResponse =
               await this.whatsappMessageService.create(whatsappBody);
-
-            // const WhatsappResponse = await axios({
-            //   method: 'POST',
-            //   url: `${BACKEND_URL}/whatsapp_messages/`,
-            //   headers: {
-            //     'ngrok-skip-browser-warning': 'true', // Include this header to bypass the warning
-            //   },
-            //   data: whatsappBody,
-            // });
           }
         }
 
