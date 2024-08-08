@@ -90,6 +90,10 @@ export class ClientSuggestionService {
         secret: jwtConstants.secret,
       });
 
+      if(payLoad.dialogues == undefined){
+        return null;
+      }
+
       const response = await this.clientSuggestionRepository.findOne({
         where: { id },
       });

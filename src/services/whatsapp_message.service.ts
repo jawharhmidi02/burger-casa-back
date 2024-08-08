@@ -55,7 +55,6 @@ export class WhatsappMessageService {
       });
 
       console.log(response);
-      
 
       const data = new WhatsappMessageFromEntity(response);
       return data;
@@ -106,6 +105,10 @@ export class WhatsappMessageService {
       const payLoad = await this.jwtService.verifyAsync(access_token, {
         secret: jwtConstants.secret,
       });
+
+      if (payLoad.dialogues == undefined) {
+        return null;
+      }
 
       const response = await this.whatsappMessageRepository.findOne({
         where: { id },

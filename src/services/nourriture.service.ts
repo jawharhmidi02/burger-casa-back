@@ -31,6 +31,10 @@ export class NourritureService {
         secret: jwtConstants.secret,
       });
 
+      if (payLoad.dialogues == undefined) {
+        return null;
+      }
+
       const response = await this.nourritureRepository.save(nourriture);
       const data = new NourritureFromEntity(response);
       return data;
@@ -177,6 +181,10 @@ export class NourritureService {
         secret: jwtConstants.secret,
       });
 
+      if (payLoad.dialogues == undefined) {
+        return null;
+      }
+
       if (nourriture.ingredients) {
         const search = await this.nourritureRepository.findOne({
           where: { id },
@@ -214,6 +222,10 @@ export class NourritureService {
       const payLoad = await this.jwtService.verifyAsync(access_token, {
         secret: jwtConstants.secret,
       });
+
+      if (payLoad.dialogues == undefined) {
+        return null;
+      }
 
       const response = await this.nourritureRepository.findOne({
         where: { id },

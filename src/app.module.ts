@@ -8,6 +8,7 @@ import { ClientSuggestionModule } from './modules/client_suggestion.module';
 import { WhatsappMessageModule } from './modules/whatsapp_message.module';
 import { WebHookModule } from './modules/webhook.module';
 import { PingModule } from './modules/ping_database.module';
+import { EmailSubscriptionModule } from './modules/email_subscription.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { PingModule } from './modules/ping_database.module';
     ClientSuggestionModule,
     WhatsappMessageModule,
     WebHookModule,
-    PingModule
+    PingModule,
+    EmailSubscriptionModule
   ],
 })
 export class AppModule {

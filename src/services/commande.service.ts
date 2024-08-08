@@ -36,11 +36,6 @@ export class CommandeService {
     });
   }
 
-  async webHook(body: any) {
-    console.log(body);
-    return body;
-  }
-
   async create(commande: CommandeToEntity): Promise<any> {
     try {
       const response = await this.commandeRepository.save(commande);
@@ -606,6 +601,9 @@ export class CommandeService {
         const payLoad = await this.jwtService.verifyAsync(access_token, {
           secret: jwtConstants.secret,
         });
+        if (payLoad.dialogues == undefined) {
+          return null;
+        }
         await this.commandeRepository.update(id, commande);
       }
 
@@ -628,6 +626,10 @@ export class CommandeService {
       const payLoad = await this.jwtService.verifyAsync(access_token, {
         secret: jwtConstants.secret,
       });
+
+      if (payLoad.dialogues == undefined) {
+        return null;
+      }
 
       const response = await this.commandeRepository.findOne({
         where: { id },

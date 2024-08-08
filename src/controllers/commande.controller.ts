@@ -17,11 +17,6 @@ import { CommandeService } from 'src/services/commande.service';
 export class CommandeController {
   constructor(private readonly commandeService: CommandeService) {}
 
-  @Post('/webhook')
-  async webHook(@Body() body: any) {
-    return this.commandeService.webHook(body);
-  }
-
   @Post()
   async create(@Body() commande: CommandeToEntity) {
     try {

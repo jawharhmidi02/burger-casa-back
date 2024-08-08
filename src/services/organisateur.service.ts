@@ -31,31 +31,33 @@ function decrypt(text: string) {
 
 @Injectable()
 export class OrganisateurService {
-
   constructor(
     @InjectRepository(Organisateur)
     private organisateurRepository: Repository<Organisateur>,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
-  async signup(organisateur: OrganisateurToEntity): Promise<OrganisateurFromEntity> {
-    try{
+  async signup(
+    organisateur: OrganisateurToEntity,
+  ): Promise<OrganisateurFromEntity> {
+    try {
       organisateur.password = encrypt(organisateur.password);
       const response = await this.organisateurRepository.save(organisateur);
       const data = new OrganisateurFromEntity(response);
 
       return data;
-    }
-    catch(error){
+    } catch (error) {
       console.log(error);
       return null;
     }
   }
 
-  async verifyEmail(email: string): Promise<boolean>{
+  async verifyEmail(email: string): Promise<boolean> {
     try {
-      const response = await this.organisateurRepository.findOne({where: {email}});
-      if(response){
+      const response = await this.organisateurRepository.findOne({
+        where: { email },
+      });
+      if (response) {
         return true;
       }
       return false;
@@ -65,84 +67,123 @@ export class OrganisateurService {
     }
   }
 
-  async findAll(access_token: string): Promise<OrganisateurFromEntity[]>{
-    try{
-      const payLoad = await this.jwtService.verifyAsync(access_token,{ secret: jwtConstants.secret});
-      
+  async findAll(access_token: string): Promise<OrganisateurFromEntity[]> {
+    try {
+      const payLoad = await this.jwtService.verifyAsync(access_token, {
+        secret: jwtConstants.secret,
+      });
+
+      if (payLoad.dialogues == undefined) {
+        return null;
+      }
+
       const response = await this.organisateurRepository.find();
       const data = new Array<OrganisateurFromEntity>(response.length);
 
       for (let i = 0; i < response.length; i++) {
         data[i] = new OrganisateurFromEntity(response[i]);
       }
-      
+
       return data;
-    }
-    catch(error){
+    } catch (error) {
       console.log(error);
       return null;
     }
   }
 
-  async signin(email: string, password: string): Promise<{ access_token: string }> {
-    try{
-      
-      const response = await this.organisateurRepository.findOne({ where: { email } });
-      if(decrypt(response.password) !== password){
+  async signin(
+    email: string,
+    password: string,
+  ): Promise<{ access_token: string }> {
+    try {
+      const response = await this.organisateurRepository.findOne({
+        where: { email },
+      });
+      if (decrypt(response.password) !== password) {
         return null;
       }
-      if(response){
-        return { access_token: await this.jwtService.signAsync({id: response.id})}
+      if (response) {
+        return {
+          access_token: await this.jwtService.signAsync({
+            id: response.id,
+            dialogues: response.dialogues,
+          }),
+        };
       }
       return null;
-    }
-    catch(error){
+    } catch (error) {
       console.log(error);
       return null;
     }
   }
 
   async findById(id: string): Promise<OrganisateurFromEntity> {
-    try{
-      const response = await this.organisateurRepository.findOne({ where: { id } });
+    try {
+      const response = await this.organisateurRepository.findOne({
+        where: { id },
+      });
       const data = new OrganisateurFromEntity(response);
       return data;
-    }
-    catch(error){
+    } catch (error) {
       console.log(error);
       return null;
     }
   }
 
-  async update(email: string, password: string, organisateur: OrganisateurToEntity, access_token: string): Promise<OrganisateurFromEntity> {
-    try{
-      const payLoad = await this.jwtService.verifyAsync(access_token,{ secret: jwtConstants.secret});
+  async update(
+    email: string,
+    password: string,
+    organisateur: OrganisateurToEntity,
+    access_token: string,
+  ): Promise<OrganisateurFromEntity> {
+    try {
+      const payLoad = await this.jwtService.verifyAsync(access_token, {
+        secret: jwtConstants.secret,
+      });
 
-      await this.organisateurRepository.update({email, password}, organisateur);
-      
-      const response = await this.organisateurRepository.findOne({ where: { email, password }});
+      if (payLoad.dialogues == undefined) {
+        return null;
+      }
+
+      await this.organisateurRepository.update(
+        { email, password },
+        organisateur,
+      );
+
+      const response = await this.organisateurRepository.findOne({
+        where: { email, password },
+      });
       const data = new OrganisateurFromEntity(response);
       return data;
-    }
-    catch(error){
+    } catch (error) {
       console.log(error);
       return null;
     }
   }
 
-  async remove(email: string, password: string, access_token: string): Promise<OrganisateurFromEntity> {
-    try{
-      const payLoad = await this.jwtService.verifyAsync(access_token,{ secret: jwtConstants.secret});
+  async remove(
+    email: string,
+    password: string,
+    access_token: string,
+  ): Promise<OrganisateurFromEntity> {
+    try {
+      const payLoad = await this.jwtService.verifyAsync(access_token, {
+        secret: jwtConstants.secret,
+      });
 
-      const response = await this.organisateurRepository.findOne({ where: { email, password }});
-      await this.organisateurRepository.delete({email, password});
+      if (payLoad.dialogues == undefined) {
+        return null;
+      }
+
+      const response = await this.organisateurRepository.findOne({
+        where: { email, password },
+      });
+      await this.organisateurRepository.delete({ email, password });
       const data = new OrganisateurFromEntity(response);
       return data;
-    }
-    catch(error){
+    } catch (error) {
       console.log(error);
       return null;
     }
   }
-
 }
