@@ -1,23 +1,23 @@
 import { Commande } from "src/entities/commande.entity";
 
 export class CommandeToEntity{
-    status: string;
+    status?: string;
 
-    total: number;
+    total?: number;
 
-    nom_client: string;
+    nom_client?: string;
 
-    tel_client: string;
+    tel_client?: string;
     
-    adresse: string;
+    adresse?: string;
 
-    content: string;
+    content?: string;
 
-    email_client: string;
+    email_client?: string;
 
-    order_type: string;
+    order_type?: string;
 
-    special_request: string;
+    special_request?: string;
 }
 
 export class CommandeFromEntity{

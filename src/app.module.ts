@@ -6,6 +6,7 @@ import { OrganisateurModule } from './modules/organisateur.module';
 import { CommandeModule } from './modules/commande.module';
 import { ClientSuggestionModule } from './modules/client_suggestion.module';
 import { WhatsappMessageModule } from './modules/whatsapp_message.module';
+import { WebHookModule } from './modules/webhook.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { WhatsappMessageModule } from './modules/whatsapp_message.module';
     OrganisateurModule,
     CommandeModule,
     ClientSuggestionModule,
-    WhatsappMessageModule
+    WhatsappMessageModule,
+    WebHookModule
   ],
 })
 export class AppModule {

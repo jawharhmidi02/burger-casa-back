@@ -82,7 +82,7 @@ export class CommandeController {
   update(
     @Param('id') id: string,
     @Body() commande: CommandeToEntity,
-    @Headers('access_token') access_token: string,
+    @Headers('access_token') access_token?: string,
     @Headers('whatsapp_api_key') whatsapp_api_key?: string,
   ): Promise<CommandeFromEntity> {
     return this.commandeService.update(id, commande, access_token, whatsapp_api_key);

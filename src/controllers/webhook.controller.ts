@@ -1,22 +1,16 @@
-import { Controller, Get, Post, Query, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Res } from '@nestjs/common';
 import { WebHookService } from 'src/services/webhook.service';
 import { Response } from 'express';
 
-const {
-  WEBHOOK_VERIFY_TOKEN,
-  GRAPH_API_TOKEN,
-  PORT,
-  BACKEND_URL,
-  WHATSAPP_API_KEY,
-} = process.env;
+const { WEBHOOK_VERIFY_TOKEN } = process.env;
 
-Controller('webhook');
+@Controller('webhook')
 export class WebHookController {
   constructor(private readonly webhookService: WebHookService) {}
 
   @Post()
-  async handleWebHook(): Promise<void> {
-    console.log('Webhook received');
+  async handleWebHook(@Body() body: any): Promise<void> {
+    await this.webhookService.handleWebHook(body);
   }
 
   @Get()

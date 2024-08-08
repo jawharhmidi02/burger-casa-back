@@ -11,7 +11,7 @@ import { jwtConstants } from 'src/constants/jwt.constant';
 export class WhatsappMessageService {
   constructor(
     @InjectRepository(WhatsappMessage)
-    private clientSuggestionRepository: Repository<WhatsappMessage>,
+    private whatsappMessageRepository: Repository<WhatsappMessage>,
     private jwtService: JwtService,
   ) {}
 
@@ -20,7 +20,7 @@ export class WhatsappMessageService {
   ): Promise<WhatsappMessageFromEntity> {
     try {
       const response =
-        await this.clientSuggestionRepository.save(clientSuggestion);
+        await this.whatsappMessageRepository.save(clientSuggestion);
 
       const data = new WhatsappMessageFromEntity(response);
 
@@ -33,7 +33,7 @@ export class WhatsappMessageService {
 
   async findAll(): Promise<WhatsappMessageFromEntity[]> {
     try {
-      const response = await this.clientSuggestionRepository.find();
+      const response = await this.whatsappMessageRepository.find();
 
       const data = new Array<WhatsappMessageFromEntity>(response.length);
 
@@ -50,7 +50,7 @@ export class WhatsappMessageService {
 
   async findById(id: string): Promise<WhatsappMessageFromEntity> {
     try {
-      const response = await this.clientSuggestionRepository.findOne({
+      const response = await this.whatsappMessageRepository.findOne({
         where: { id },
       });
 
@@ -67,7 +67,7 @@ export class WhatsappMessageService {
 
   async findByMessageId(id: string): Promise<WhatsappMessageFromEntity> {
     try {
-      const response = await this.clientSuggestionRepository.findOne({
+      const response = await this.whatsappMessageRepository.findOne({
         where: { message_id: id },
       });
 
@@ -81,7 +81,7 @@ export class WhatsappMessageService {
 
   async findByOrderId(id: string): Promise<WhatsappMessageFromEntity[]> {
     try {
-      const response = await this.clientSuggestionRepository.find({
+      const response = await this.whatsappMessageRepository.find({
         where: { message_id: id },
       });
 
@@ -107,11 +107,11 @@ export class WhatsappMessageService {
         secret: jwtConstants.secret,
       });
 
-      const response = await this.clientSuggestionRepository.findOne({
+      const response = await this.whatsappMessageRepository.findOne({
         where: { id },
       });
 
-      await this.clientSuggestionRepository.delete(id);
+      await this.whatsappMessageRepository.delete(id);
       const data = new WhatsappMessageFromEntity(response);
 
       return data;

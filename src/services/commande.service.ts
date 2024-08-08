@@ -591,7 +591,7 @@ export class CommandeService {
   async update(
     id: string,
     commande: CommandeToEntity,
-    access_token: string,
+    access_token?: string,
     whatsapp_api_key?: string,
   ): Promise<CommandeFromEntity> {
     try {
