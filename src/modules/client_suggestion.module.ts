@@ -4,10 +4,12 @@ import { ClientSuggestionController } from '../controllers/client_suggestion.con
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClientSuggestion } from '../entities/client_suggestion.entity';
 import { WhatsappMessage } from 'src/entities/whatsapp_message.entity';
-import { WhatsappMessageModule } from './whatsapp_message.module';
+import { Organisateur } from 'src/entities/organisateur.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ClientSuggestion, WhatsappMessage])],
+  imports: [
+    TypeOrmModule.forFeature([ClientSuggestion, WhatsappMessage, Organisateur]),
+  ],
   controllers: [ClientSuggestionController],
   providers: [ClientSuggestionService],
 })

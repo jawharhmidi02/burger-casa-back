@@ -6,12 +6,15 @@ import { ClientSuggestionFromEntity } from 'src/dto/client_suggestion.dto';
 import { ClientSuggestionToEntity } from 'src/dto/client_suggestion.dto';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from 'src/constants/jwt.constant';
+import { Organisateur } from 'src/entities/organisateur.entity';
 
 @Injectable()
 export class ClientSuggestionService {
   constructor(
     @InjectRepository(ClientSuggestion)
     private clientSuggestionRepository: Repository<ClientSuggestion>,
+    @InjectRepository(Organisateur)
+    private organisateurRepository: Repository<Organisateur>,
     private jwtService: JwtService,
   ) {}
 
@@ -90,7 +93,15 @@ export class ClientSuggestionService {
         secret: jwtConstants.secret,
       });
 
-      if(payLoad.dialogues == undefined){
+      if (payLoad.role == undefined || payLoad.role != 'admin') {
+        return null;
+      }
+
+      const account = await this.organisateurRepository.findOne({
+        where: { id: payLoad.id },
+      });
+
+      if (!account || account.nonce != payLoad.nonce) {
         return null;
       }
 

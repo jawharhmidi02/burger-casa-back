@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Organisateur } from '../entities/organisateur.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from 'src/constants/jwt.constant';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { jwtConstants } from 'src/constants/jwt.constant';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '7d' },
     }),
+    HttpModule
   ],
   controllers: [OrganisateurController],
   providers: [OrganisateurService],

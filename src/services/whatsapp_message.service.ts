@@ -106,8 +106,25 @@ export class WhatsappMessageService {
         secret: jwtConstants.secret,
       });
 
-      if (payLoad.dialogues == undefined) {
+      if (payLoad.role == undefined) {
         return null;
+      }
+
+      const accountFetch = await fetch(
+        `${process.env.URL}organisateurs/byid/${payLoad.id}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+
+      if (accountFetch.ok) {
+        const account = await accountFetch.json();
+        if (!account || account.nonce != payLoad.nonce) {
+          return null;
+        }
       }
 
       const response = await this.whatsappMessageRepository.findOne({

@@ -32,13 +32,13 @@ export class EmailSubscriptionController{
     }
 
     @Delete('byid/:id')
-    deleteById(@Param('id') id: string): Promise<EmailSubscriptionToEntity>{
-        return this.emailSubscriptionService.deleteById(id);
+    deleteById(@Headers('access_token') token: string, @Param('id') id: string): Promise<EmailSubscriptionToEntity>{
+        return this.emailSubscriptionService.deleteById(token, id);
     }
 
     @Delete('byemail/:email')
-    deleteByEmail(@Param('email') email: string): Promise<EmailSubscriptionToEntity>{
-        return this.emailSubscriptionService.deleteByEmail(email);
+    deleteByEmail(@Headers('access_token') access_token: string, @Param('email') email: string): Promise<EmailSubscriptionToEntity>{
+        return this.emailSubscriptionService.deleteByEmail(access_token, email);
     }
 
     @Get('cancel-subs')

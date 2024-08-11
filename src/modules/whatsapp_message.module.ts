@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WhatsappMessageController } from 'src/controllers/whatsapp_message.controller';
+import { Organisateur } from 'src/entities/organisateur.entity';
 import { WhatsappMessage } from 'src/entities/whatsapp_message.entity';
 import { WhatsappMessageService } from 'src/services/whatsapp_message.service';
 

@@ -19,4 +19,10 @@ export class Organisateur {
 
   @Column('text', { array: true })
   dialogues: string[];
+
+  @Column()
+  role: string;
+
+  @Column({nullable: true})
+  nonce: string;
 }

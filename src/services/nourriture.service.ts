@@ -4,6 +4,7 @@ import {
   LessThanOrEqual,
   Like,
   MoreThanOrEqual,
+  Or,
   Raw,
   Repository,
 } from 'typeorm';
@@ -13,6 +14,7 @@ import { NourritureFromEntity } from 'src/dto/nourriture.dto';
 import { NourritureToEntity } from 'src/dto/nourriture.dto';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from 'src/constants/jwt.constant';
+import { Organisateur } from 'src/entities/organisateur.entity';
 
 @Injectable()
 export class NourritureService {
@@ -20,6 +22,8 @@ export class NourritureService {
     @InjectRepository(Nourriture)
     private nourritureRepository: Repository<Nourriture>,
     private jwtService: JwtService,
+    @InjectRepository(Organisateur)
+    private organisateurRepository: Repository<Organisateur>,
   ) {}
 
   async create(
@@ -31,7 +35,15 @@ export class NourritureService {
         secret: jwtConstants.secret,
       });
 
-      if (payLoad.dialogues == undefined) {
+      if (payLoad.role == undefined) {
+        return null;
+      }
+
+      const account = await this.organisateurRepository.findOne({
+        where: { id: payLoad.id },
+      });
+
+      if (!account || account.nonce != payLoad.nonce) {
         return null;
       }
 
@@ -136,13 +148,23 @@ export class NourritureService {
           }),
         });
       }
+
       if (categorie) {
+        const categoriesArray = categorie.split(' ');
+
+        const conditions = categoriesArray.map((category) => `%${category}%`);
+
         whereConditions.push({
-          categorie: Raw((alias) => `LOWER(${alias}) ILIKE LOWER(:categorie)`, {
-            categorie: `%${categorie}%`,
-          }),
+          categorie: Raw(
+            (alias) =>
+              `${conditions.map((_, i) => `LOWER(${alias}) ILIKE LOWER(:categorie${i})`).join(' OR ')}`,
+            Object.fromEntries(
+              conditions.map((condition, i) => [`categorie${i}`, condition]),
+            ),
+          ),
         });
       }
+
       if (minPrice !== undefined && maxPrice !== undefined) {
         whereConditions.push({
           prix: And(MoreThanOrEqual(minPrice), LessThanOrEqual(maxPrice)),
@@ -164,6 +186,9 @@ export class NourritureService {
         order,
       });
 
+      const response1 = await this.nourritureRepository.find({
+        where: { categorie: Or(Like(`%FD%`)) },
+      });
       return response.map((item) => new NourritureFromEntity(item));
     } catch (error) {
       console.log(error);
@@ -181,7 +206,15 @@ export class NourritureService {
         secret: jwtConstants.secret,
       });
 
-      if (payLoad.dialogues == undefined) {
+      if (payLoad.role == undefined) {
+        return null;
+      }
+
+      const account = await this.organisateurRepository.findOne({
+        where: { id: payLoad.id },
+      });
+
+      if (!account || account.nonce != payLoad.nonce) {
         return null;
       }
 
@@ -223,7 +256,15 @@ export class NourritureService {
         secret: jwtConstants.secret,
       });
 
-      if (payLoad.dialogues == undefined) {
+      if (payLoad.role == undefined) {
+        return null;
+      }
+
+      const account = await this.organisateurRepository.findOne({
+        where: { id: payLoad.id },
+      });
+
+      if (!account || account.nonce != payLoad.nonce) {
         return null;
       }
 

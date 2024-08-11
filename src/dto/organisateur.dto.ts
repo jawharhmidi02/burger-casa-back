@@ -10,6 +10,10 @@ export class OrganisateurToEntity{
     telephone: string;
 
     dialogues: string[];
+
+    role: string;
+
+    nonce: string;
 }
 
 export class OrganisateurFromEntity{
@@ -23,11 +27,17 @@ export class OrganisateurFromEntity{
 
     dialogues: string[];
 
+    role: string;
+
+    nonce: string;
+
     constructor(organisateur: Organisateur){
         this.dialogues = organisateur.dialogues;
         this.email = organisateur.email;
         this.id = organisateur.id;
         this.nom_prenom = organisateur.nom_prenom;
         this.telephone = organisateur.telephone;
+        this.role = organisateur.role;
+        this.nonce = organisateur.nonce;
     }
 }

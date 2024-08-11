@@ -1,7 +1,9 @@
+import { OrganisateurService } from './organisateur.service';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Commande } from 'src/entities/commande.entity';
+import { Organisateur } from 'src/entities/organisateur.entity';
 import { CommandeFromEntity, CommandeToEntity } from 'src/dto/commande.dto';
 import { jwtConstants } from 'src/constants/jwt.constant';
 import { JwtService, TokenExpiredError } from '@nestjs/jwt';
@@ -590,8 +592,6 @@ export class CommandeService {
     whatsapp_api_key?: string,
   ): Promise<CommandeFromEntity> {
     try {
-      console.log(whatsapp_api_key);
-      console.log(commande);
       if (
         whatsapp_api_key &&
         whatsapp_api_key === process.env.WHATSAPP_API_KEY
@@ -601,9 +601,28 @@ export class CommandeService {
         const payLoad = await this.jwtService.verifyAsync(access_token, {
           secret: jwtConstants.secret,
         });
-        if (payLoad.dialogues == undefined) {
+
+        const accountFetch = await fetch(
+          `${process.env.URL}organisateurs/byid/${payLoad.id}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+
+        if (accountFetch.ok) {
+          const account = await accountFetch.json();
+          if (!account || account.nonce != payLoad.nonce) {
+            return null;
+          }
+        }
+
+        if (payLoad.role == undefined) {
           return null;
         }
+
         await this.commandeRepository.update(id, commande);
       }
 
@@ -614,9 +633,11 @@ export class CommandeService {
       }
 
       const data = new CommandeFromEntity(response);
+
       return data;
     } catch (error) {
       console.log(error);
+
       throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
   }
@@ -627,8 +648,25 @@ export class CommandeService {
         secret: jwtConstants.secret,
       });
 
-      if (payLoad.dialogues == undefined) {
+      if (payLoad.role == undefined) {
         return null;
+      }
+
+      const accountFetch = await fetch(
+        `${process.env.URL}organisateurs/byid/${payLoad.id}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+
+      if (accountFetch.ok) {
+        const account = await accountFetch.json();
+        if (!account || account.nonce != payLoad.nonce) {
+          return null;
+        }
       }
 
       const response = await this.commandeRepository.findOne({

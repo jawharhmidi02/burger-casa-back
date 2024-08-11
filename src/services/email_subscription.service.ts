@@ -9,6 +9,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import * as nodemailer from 'nodemailer';
 import { jwtConstants } from 'src/constants/jwt.constant';
+import { Organisateur } from 'src/entities/organisateur.entity';
 
 const { URL } = process.env;
 
@@ -20,6 +21,8 @@ export class EmailSubscriptionService {
     @InjectRepository(EmailSubscription)
     private emailSubscriptionRepository: Repository<EmailSubscription>,
     private jwtService: JwtService,
+    @InjectRepository(Organisateur)
+    private organisateurRepository: Repository<Organisateur>,
   ) {
     this.transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -151,8 +154,7 @@ export class EmailSubscriptionService {
     try {
       const payLoad = await this.jwtService.verifyAsync(access_token);
 
-      if(payLoad.dialogues == undefined){
-
+      if (payLoad.role == undefined || payLoad.role != 'admin') {
         return null;
       }
 
@@ -228,8 +230,25 @@ export class EmailSubscriptionService {
     }
   }
 
-  async deleteById(id: string): Promise<EmailSubscriptionFromEntity> {
+  async deleteById(
+    access_token: string,
+    id: string,
+  ): Promise<EmailSubscriptionFromEntity> {
     try {
+      const payLoad = await this.jwtService.verifyAsync(access_token);
+
+      if (payLoad.role == undefined || payLoad.role != 'admin') {
+        return null;
+      }
+
+      const account = await this.organisateurRepository.findOne({
+        where: { id: payLoad.id },
+      });
+
+      if (!account || account.nonce != payLoad.nonce) {
+        return null;
+      }
+
       const response = await this.emailSubscriptionRepository.findOne({
         where: { id },
       });
@@ -246,8 +265,25 @@ export class EmailSubscriptionService {
     }
   }
 
-  async deleteByEmail(email: string): Promise<EmailSubscriptionFromEntity> {
+  async deleteByEmail(
+    access_token: string,
+    email: string,
+  ): Promise<EmailSubscriptionFromEntity> {
     try {
+      const payLoad = await this.jwtService.verifyAsync(access_token);
+
+      if (payLoad.role == undefined || payLoad.role != 'admin') {
+        return null;
+      }
+
+      const account = await this.organisateurRepository.findOne({
+        where: { id: payLoad.id },
+      });
+
+      if (!account || account.nonce != payLoad.nonce) {
+        return null;
+      }
+
       const response = await this.emailSubscriptionRepository.findOne({
         where: { email },
       });
@@ -267,8 +303,6 @@ export class EmailSubscriptionService {
   async cancelSubscription(token: string): Promise<string> {
     try {
       const payload = await this.jwtService.verifyAsync(token);
-
-      console.log(payload);
 
       const response = await this.emailSubscriptionRepository.findOne({
         where: { id: payload.id },
