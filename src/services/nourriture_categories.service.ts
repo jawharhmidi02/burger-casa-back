@@ -56,7 +56,7 @@ export class NourritureCategorieService {
 
   async findAll(
     page: number = 1,
-    limit: number = 1,
+    limit: number = 10,
   ): Promise<any> {
     try {
       const [response, totalItems] =
@@ -76,6 +76,7 @@ export class NourritureCategorieService {
       };
     } catch (error) {
       console.log(error);
+
       return null;
     }
   }

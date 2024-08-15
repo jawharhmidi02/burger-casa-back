@@ -551,17 +551,22 @@ export class CommandeService {
     }
   }
 
-  async findAll(): Promise<CommandeFromEntity[]> {
+  async findAll(page: number = 1, limit: number = 1): Promise<any> {
     try {
-      const response = await this.commandeRepository.find();
+      const [response, totalItems] = await this.commandeRepository.findAndCount(
+        {
+          skip: (page - 1) * limit,
+          take: limit,
+        },
+      );
 
-      const data = new Array<CommandeFromEntity>(response.length);
+      const data = response.map((item) => new CommandeFromEntity(item));
 
-      for (let i = 0; i < response.length; i++) {
-        data[i] = new CommandeFromEntity(response[i]);
-      }
-
-      return data;
+      return {
+        data,
+        totalPages: Math.ceil(totalItems / limit),
+        currentPage: page,
+      };
     } catch (error) {
       console.log(error);
 

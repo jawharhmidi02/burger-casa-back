@@ -32,8 +32,11 @@ export class CommandeController {
   }
 
   @Get()
-  findAll(): Promise<CommandeFromEntity[]> {
-    return this.commandeService.findAll();
+  findAll(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+  ): Promise<any> {
+    return this.commandeService.findAll(page, limit);
   }
 
   @Get('/verify-order')
@@ -42,9 +45,8 @@ export class CommandeController {
       throw new BadRequestException('Token is required');
     }
     try {
-      
       const commande = await this.commandeService.verifyToken(token);
-      
+
       return commande;
     } catch (error) {
       throw new BadRequestException('Invalid or expired token');
@@ -57,13 +59,12 @@ export class CommandeController {
       throw new BadRequestException('Token is required');
     }
     try {
-      
       const commande = await this.commandeService.CancelOrder(token);
 
       return commande;
     } catch (error) {
       console.log(error);
-      
+
       return error;
     }
   }
@@ -80,7 +81,12 @@ export class CommandeController {
     @Headers('access_token') access_token?: string,
     @Headers('whatsapp_api_key') whatsapp_api_key?: string,
   ): Promise<CommandeFromEntity> {
-    return this.commandeService.update(id, commande, access_token, whatsapp_api_key);
+    return this.commandeService.update(
+      id,
+      commande,
+      access_token,
+      whatsapp_api_key,
+    );
   }
 
   @Delete(':id')
