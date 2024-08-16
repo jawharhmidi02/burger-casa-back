@@ -95,7 +95,7 @@ export class CommandeService {
               <a href="${URL}commandes/cancel-order?token=${token}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF0000; text-decoration: none; border-radius: 5px;">Cancel Order</a>
             </p>
             <p style="font-size: 16px; color: #333;">If you have any questions, feel free to contact us at any time.</p>
-            <p style="font-size: 16px; color: #333;">Best regards,<br>Your Restaurant Team</p>
+            <p style="font-size: 16px; color: #333;">Best regards,<br>Your BurgerCasa Team</p>
           </div>
         `,
       };
@@ -171,7 +171,7 @@ export class CommandeService {
         let html = `
         <html>
           <head>
-            <title>Restaurant: Order Verified</title>
+            <title>BurgerCasa: Order Verified</title>
             <style>
               body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
               .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
@@ -226,8 +226,8 @@ export class CommandeService {
                   <td>${formatDate(response.data_creation)}</td>
                 </tr>
               </table>
-              <p>We are preparing your order and will notify you once it’s ready. Thank you for choosing our restaurant!</p>
-              <p>Best regards,<br>Your Restaurant Team</p>
+              <p>We are preparing your order and will notify you once it’s ready. Thank you for choosing our BurgerCasa!</p>
+              <p>Best regards,<br>Your BurgerCasa Team</p>
             </div>
           </body>
         </html>
@@ -244,7 +244,7 @@ export class CommandeService {
           let html = `
           <html>
             <head>
-              <title>Restaurant: Error</title>
+              <title>BurgerCasa: Error</title>
               <style>
                 body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
                 .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
@@ -258,7 +258,7 @@ export class CommandeService {
                 <h1>Order Already Verified</h1>
                 <p>Dear ${response.nom_client},</p>
                 <p>Your order has already been verified. Please wait for the preparation of your order.</p>
-                <p>Best regards,<br>Your Restaurant Team</p>
+                <p>Best regards,<br>Your BurgerCasa Team</p>
               </div>
             </body>
           </html>
@@ -273,7 +273,7 @@ export class CommandeService {
             let html = `
             <html>
               <head>
-                <title>Restaurant: Cancel Order</title>
+                <title>BurgerCasa: Cancel Order</title>
                 <style>
                   body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
                   .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
@@ -287,7 +287,7 @@ export class CommandeService {
                   <h1>Order Canceled</h1>
                   <p>Dear ${response.nom_client},</p>
                   <p>Your order has been canceled.</p>
-                  <p>Best regards,<br>Your Restaurant Team</p>
+                  <p>Best regards,<br>Your BurgerCasa Team</p>
                 </div>
               </body>
             </html>
@@ -322,7 +322,7 @@ export class CommandeService {
         html = `
           <html>
             <head>
-              <title>Restaurant: Token Expired</title>
+              <title>BurgerCasa: Token Expired</title>
               <style>
                 body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
                 .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
@@ -336,7 +336,7 @@ export class CommandeService {
                 <h1>Verification Token Expired</h1>
                 <p>Dear ${response.nom_client},</p>
                 <p>Your verification token has expired. Please request a new order.</p>
-                <p>Best regards,<br>Your Restaurant Team</p>
+                <p>Best regards,<br>Your BurgerCasa Team</p>
               </div>
             </body>
           </html>
@@ -352,7 +352,7 @@ export class CommandeService {
       html = `
         <html>
           <head>
-              <title>Restaurant: Error</title>
+              <title>BurgerCasa: Error</title>
             <style>
               body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
               .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
@@ -364,7 +364,7 @@ export class CommandeService {
             <div class="container">
               <h1>Order Verification Failed</h1>
               <p>There was an error verifying your order. Please try again later or contact support if the issue persists.</p>
-              <p>Best regards,<br>Your Restaurant Team</p>
+              <p>Best regards,<br>Your BurgerCasa Team</p>
             </div>
           </body>
         </html>
@@ -405,7 +405,7 @@ export class CommandeService {
       const html = `
       <html>
         <head>
-          <title>Restaurant: Order Canceled</title>
+          <title>BurgerCasa: Order Canceled</title>
           <style>
             body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
             .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9; }
@@ -461,8 +461,8 @@ export class CommandeService {
               </tr>
             </table>
             <p>If you have any questions or need further assistance, please contact us at [Your Contact Information].</p>
-            <p>Thank you for choosing our restaurant!</p>
-            <p>Best regards,<br>Your Restaurant Team</p>
+            <p>Thank you for choosing our BurgerCasa!</p>
+            <p>Best regards,<br>Your BurgerCasa Team</p>
           </div>
         </body>
       </html>
@@ -478,7 +478,7 @@ export class CommandeService {
         html = `
         <html>
           <head>
-              <title>Restaurant: Cancel Failed</title>
+              <title>BurgerCasa: Cancel Failed</title>
 
             <style>
               body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
@@ -493,7 +493,7 @@ export class CommandeService {
               <p>Dear Customer,</p>
               <p>We could not process the cancellation of your order. It may have already been canceled or does not exist.</p>
               <p>Please contact us if you believe this is an error or need further assistance.</p>
-              <p>Best regards,<br>Your Restaurant Team</p>
+              <p>Best regards,<br>Your BurgerCasa Team</p>
             </div>
           </body>
         </html>
@@ -502,7 +502,7 @@ export class CommandeService {
         html = `
         <html>
           <head>
-              <title>Restaurant: Order Verified</title>
+              <title>BurgerCasa: Order Verified</title>
 
             <style>
               body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
@@ -517,7 +517,7 @@ export class CommandeService {
               <p>Dear Customer,</p>
               <p>The order you are trying to cancel has already been verified and cannot be canceled at this stage.</p>
               <p>If you have any further questions or need assistance, please contact us.</p>
-              <p>Best regards,<br>Your Restaurant Team</p>
+              <p>Best regards,<br>Your BurgerCasa Team</p>
             </div>
           </body>
         </html>
@@ -526,7 +526,7 @@ export class CommandeService {
         html = `
         <html>
           <head>
-              <title>Restaurant: Error</title>
+              <title>BurgerCasa: Error</title>
 
             <style>
               body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
@@ -540,7 +540,7 @@ export class CommandeService {
               <h1>Order Cancellation Failed</h1>
               <p>Dear Customer,</p>
               <p>There was an error while processing your cancellation request. Please try again later or contact support for assistance.</p>
-              <p>Best regards,<br>Your Restaurant Team</p>
+              <p>Best regards,<br>Your BurgerCasa Team</p>
             </div>
           </body>
         </html>

@@ -120,7 +120,7 @@ export class EmailSubscriptionService {
       <a href="${cancelUrl}" class="button">Unsubscribe</a>
     </div>
     <div class="footer">
-      <p>&copy; 2024 Restaurant. All rights reserved.</p>
+      <p>&copy; 2024 BurgerCasa. All rights reserved.</p>
     </div>
   </div>
 </body>
@@ -383,7 +383,7 @@ export class EmailSubscriptionService {
       <p>If this was a mistake or if you change your mind, feel free to resubscribe anytime!</p>
     </div>
     <div class="footer">
-      <p>&copy; 2024 Restaurant. All rights reserved.</p>
+      <p>&copy; 2024 BurgerCasa. All rights reserved.</p>
     </div>
   </div>
 </body>
@@ -478,7 +478,7 @@ export class EmailSubscriptionService {
       <p>If the problem persists, feel free to contact our support team for assistance.</p>
     </div>
     <div class="footer">
-      <p>&copy; 2024 Your Restaurant Name. All rights reserved.</p>
+      <p>&copy; 2024 Your BurgerCasa Name. All rights reserved.</p>
     </div>
   </div>
 </body>

@@ -300,7 +300,7 @@ If you didn't request this, please ignore this message.
             <p>If you didn't request this, please ignore this email.</p>
         </div>
         <div class="footer">
-            <p>&copy; 2024 Restaurant. All rights reserved.</p>
+            <p>&copy; 2024 BurgerCasa. All rights reserved.</p>
         </div>
     </div>
 </body>
@@ -349,7 +349,7 @@ If you didn't request this, please ignore this message.
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant: Reset Password</title>
+    <title>BurgerCasa: Reset Password</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
