@@ -63,7 +63,7 @@ export class CommandeService {
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 10px; border: 1px solid #e0e0e0;">Order Total:</td>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.total} DT</td>
+                <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.total}&#8364;</td>
               </tr>
               <tr>
                 <td style="padding: 10px; border: 1px solid #e0e0e0;">Client Name:</td>
@@ -95,7 +95,7 @@ export class CommandeService {
               <a href="${URL}commandes/cancel-order?token=${token}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF0000; text-decoration: none; border-radius: 5px;">Cancel Order</a>
             </p>
             <p style="font-size: 16px; color: #333;">If you have any questions, feel free to contact us at any time.</p>
-            <p style="font-size: 16px; color: #333;">Best regards,<br>Your BurgerCasa Team</p>
+            <p style="font-size: 16px; color: #333;">Best regards,<br>BurgerCasa</p>
           </div>
         `,
       };
@@ -135,7 +135,7 @@ export class CommandeService {
 
         // Send WhatsApp notification
         const url = `https://graph.facebook.com/v20.0/${process.env.FACEBOOK_ACCOUNT_ID}/messages`;
-        const message = `New Order:\n- Name: ${response.nom_client}\n- Phone: ${response.tel_client}\n- Address: ${response.adresse}\n- Order: \n${response.content}\n- Order Type: ${response.order_type}\n- Total: ${response.total} DT\n- State: ${response.status}\n- Order ID: ${response.id}\n- Special Request: ${response.special_request}\n- Creation Date: ${formatDate(response.data_creation)}`;
+        const message = `New Order:\n- Name: ${response.nom_client}\n- Phone: ${response.tel_client}\n- Address: ${response.adresse}\n- Order: \n${response.content}\n- Order Type: ${response.order_type}\n- Total: ${response.total}€\n- State: ${response.status}\n- Order ID: ${response.id}\n- Special Request: ${response.special_request}\n- Creation Date: ${formatDate(response.data_creation)}`;
 
         const payload = {
           messaging_product: 'whatsapp',
@@ -191,7 +191,7 @@ export class CommandeService {
               <table>
                 <tr>
                   <th>Order Total:</th>
-                  <td>${response.total} DT</td>
+                  <td>${response.total}&#8364;</td>
                 </tr>
                 <tr>
                   <th>Client Name:</th>
@@ -227,7 +227,7 @@ export class CommandeService {
                 </tr>
               </table>
               <p>We are preparing your order and will notify you once it’s ready. Thank you for choosing our BurgerCasa!</p>
-              <p>Best regards,<br>Your BurgerCasa Team</p>
+              <p>Best regards,<br>BurgerCasa</p>
             </div>
           </body>
         </html>
@@ -258,7 +258,7 @@ export class CommandeService {
                 <h1>Order Already Verified</h1>
                 <p>Dear ${response.nom_client},</p>
                 <p>Your order has already been verified. Please wait for the preparation of your order.</p>
-                <p>Best regards,<br>Your BurgerCasa Team</p>
+                <p>Best regards,<br>BurgerCasa</p>
               </div>
             </body>
           </html>
@@ -287,7 +287,7 @@ export class CommandeService {
                   <h1>Order Canceled</h1>
                   <p>Dear ${response.nom_client},</p>
                   <p>Your order has been canceled.</p>
-                  <p>Best regards,<br>Your BurgerCasa Team</p>
+                  <p>Best regards,<br>BurgerCasa</p>
                 </div>
               </body>
             </html>
@@ -336,7 +336,7 @@ export class CommandeService {
                 <h1>Verification Token Expired</h1>
                 <p>Dear ${response.nom_client},</p>
                 <p>Your verification token has expired. Please request a new order.</p>
-                <p>Best regards,<br>Your BurgerCasa Team</p>
+                <p>Best regards,<br>BurgerCasa</p>
               </div>
             </body>
           </html>
@@ -364,7 +364,7 @@ export class CommandeService {
             <div class="container">
               <h1>Order Verification Failed</h1>
               <p>There was an error verifying your order. Please try again later or contact support if the issue persists.</p>
-              <p>Best regards,<br>Your BurgerCasa Team</p>
+              <p>Best regards,<br>BurgerCasa</p>
             </div>
           </body>
         </html>
@@ -425,7 +425,7 @@ export class CommandeService {
             <table>
               <tr>
                 <th>Order Total:</th>
-                <td>${response.total} DT</td>
+                <td>${response.total}&#8364;</td>
               </tr>
               <tr>
                 <th>Client Name:</th>
@@ -462,7 +462,7 @@ export class CommandeService {
             </table>
             <p>If you have any questions or need further assistance, please contact us at [Your Contact Information].</p>
             <p>Thank you for choosing our BurgerCasa!</p>
-            <p>Best regards,<br>Your BurgerCasa Team</p>
+            <p>Best regards,<br>BurgerCasa</p>
           </div>
         </body>
       </html>
@@ -493,7 +493,7 @@ export class CommandeService {
               <p>Dear Customer,</p>
               <p>We could not process the cancellation of your order. It may have already been canceled or does not exist.</p>
               <p>Please contact us if you believe this is an error or need further assistance.</p>
-              <p>Best regards,<br>Your BurgerCasa Team</p>
+              <p>Best regards,<br>BurgerCasa</p>
             </div>
           </body>
         </html>
@@ -517,7 +517,7 @@ export class CommandeService {
               <p>Dear Customer,</p>
               <p>The order you are trying to cancel has already been verified and cannot be canceled at this stage.</p>
               <p>If you have any further questions or need assistance, please contact us.</p>
-              <p>Best regards,<br>Your BurgerCasa Team</p>
+              <p>Best regards,<br>BurgerCasa</p>
             </div>
           </body>
         </html>
@@ -540,7 +540,7 @@ export class CommandeService {
               <h1>Order Cancellation Failed</h1>
               <p>Dear Customer,</p>
               <p>There was an error while processing your cancellation request. Please try again later or contact support for assistance.</p>
-              <p>Best regards,<br>Your BurgerCasa Team</p>
+              <p>Best regards,<br>BurgerCasa</p>
             </div>
           </body>
         </html>

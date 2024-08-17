@@ -9,7 +9,7 @@ function formatDate(date: Date): string {
   return format(new Date(date), 'yyyy-MM-dd HH:mm');
 }
 
-const { GRAPH_API_TOKEN, WHATSAPP_API_KEY } = process.env;
+const { FACEBOOK_ACCESS_TOKEN, WHATSAPP_API_KEY } = process.env;
 
 @Injectable()
 export class WebHookService {
@@ -83,7 +83,7 @@ export class WebHookService {
               response.adresse
             }\n- Order: \n${response.content}\n- Order Type: ${
               response.order_type
-            }\n- Total: ${response.total} DT\n- State: ${
+            }\n- Total: ${response.total}€\n- State: ${
               response.status
             }\n- Order ID: ${response.id}\n- Special Request: ${
               response.special_request
@@ -93,7 +93,7 @@ export class WebHookService {
               method: 'POST',
               url: `https://graph.facebook.com/v20.0/${business_phone_number_id}/messages`,
               headers: {
-                Authorization: `Bearer ${GRAPH_API_TOKEN}`,
+                Authorization: `Bearer ${FACEBOOK_ACCESS_TOKEN}`,
                 'Content-Type': 'application/json',
               },
               data: {
@@ -124,7 +124,7 @@ export class WebHookService {
         //   method: "POST",
         //   url: `https://graph.facebook.com/v20.0/${business_phone_number_id}/messages`,
         //   headers: {
-        //     Authorization: `Bearer ${GRAPH_API_TOKEN}`,
+        //     Authorization: `Bearer ${FACEBOOK_ACCESS_TOKEN}`,
         //   },
         //   data: {
         //     messaging_product: "whatsapp",
@@ -141,7 +141,7 @@ export class WebHookService {
           method: 'POST',
           url: `https://graph.facebook.com/v20.0/${business_phone_number_id}/messages`,
           headers: {
-            Authorization: `Bearer ${GRAPH_API_TOKEN}`,
+            Authorization: `Bearer ${FACEBOOK_ACCESS_TOKEN}`,
           },
           data: {
             messaging_product: 'whatsapp',
@@ -155,7 +155,7 @@ export class WebHookService {
         //   method: "POST",
         //   url: `https://graph.facebook.com/v20.0/${business_phone_number_id}/messages`,
         //   headers: {
-        //     Authorization: `Bearer ${GRAPH_API_TOKEN}`,
+        //     Authorization: `Bearer ${FACEBOOK_ACCESS_TOKEN}`,
         //   },
         //   data: {
         //     messaging_product: "whatsapp",
