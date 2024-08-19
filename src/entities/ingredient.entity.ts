@@ -11,6 +11,6 @@ export class Ingredient {
     @Column()
     disponible: boolean;
 
-    @Column()
-    photo: string;
+    // @Column({nullable: true})
+    // photo: string;
 }

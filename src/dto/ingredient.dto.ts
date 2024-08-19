@@ -5,7 +5,7 @@ export class IngredientToEntity{
 
     disponible: boolean;
 
-    photo: string;
+    // photo: string;
 }
 
 export class IngredientFromEntity{
@@ -15,12 +15,12 @@ export class IngredientFromEntity{
 
     disponible: boolean;
 
-    photo: string;
+    // photo: string;
 
     constructor(ingredient: Ingredient){
         this.disponible = ingredient.disponible;
         this.id = ingredient.id;
         this.nom = ingredient.nom;
-        this.photo = ingredient.photo;
+        // this.photo = ingredient.photo;
     }
 }
