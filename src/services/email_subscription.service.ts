@@ -46,13 +46,13 @@ export class EmailSubscriptionService {
 
       const html = `
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-  a{
-  color: white;
+  a {
+    color: white;
   }
     body {
       font-family: "Roboto", sans-serif;
@@ -86,9 +86,9 @@ export class EmailSubscriptionService {
     .content h2 {
       color: #BC3908;
     }
-      .content a{
-        color: white !important;
-      }
+    .content a {
+      color: white !important;
+    }
     .button {
       display: inline-block;
       padding: 10px 20px;
@@ -111,20 +111,21 @@ export class EmailSubscriptionService {
 <body>
   <div class="container">
     <div class="header">
-      <h1>Welcome to Our Newsletter!</h1>
+      <h1>Benvenuto alla Nostra Newsletter!</h1>
     </div>
     <div class="content">
-      <h2>Thank you for subscribing!</h2>
-      <p>We're excited to have you on board. You'll now receive the latest news, offers, and updates directly to your inbox.</p>
-      <p>If you wish to unsubscribe at any time, simply click the button below:</p>
-      <a href="${cancelUrl}" class="button">Unsubscribe</a>
+      <h2>Grazie per esserti iscritto!</h2>
+      <p>Siamo entusiasti di averti a bordo. Ora riceverai le ultime notizie, offerte e aggiornamenti direttamente nella tua casella di posta.</p>
+      <p>Se desideri annullare l'iscrizione in qualsiasi momento, clicca semplicemente sul pulsante qui sotto:</p>
+      <a href="${cancelUrl}" class="button">Annulla Iscrizione</a>
     </div>
     <div class="footer">
-      <p>&copy; 2024 BurgerCasa. All rights reserved.</p>
+      <p>&copy; 2024 BurgerCasa. Tutti i diritti riservati.</p>
     </div>
   </div>
 </body>
 </html>
+
 `;
 
       const mailOptions = {
@@ -313,13 +314,13 @@ export class EmailSubscriptionService {
 
         const html = `
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-  :root{
-  ---first-color: #F6AA1C;
+  :root {
+    ---first-color: #F6AA1C;
     ---second-color: #BC3908;
     ---third-color: #941B0C;
     ---fourth-color: #621708;
@@ -328,7 +329,8 @@ export class EmailSubscriptionService {
     ---second-family: "Roboto", sans-serif;
     ---third-family: "Rubik", sans-serif;
     ---fourth-family: "Roboto", sans-serif;
-    ---background-color: #ffffff;}
+    ---background-color: #ffffff;
+  }
     body {
       font-family: var(---second-family), sans-serif;
       background-color: var(---background-color);
@@ -375,19 +377,20 @@ export class EmailSubscriptionService {
 <body>
   <div class="container">
     <div class="header">
-      <h1>Subscription Canceled</h1>
+      <h1>Iscrizione Annullata</h1>
     </div>
     <div class="content">
-      <h2>We're sorry to see you go!</h2>
-      <p>Your subscription has been successfully canceled. You will no longer receive our newsletters and offers.</p>
-      <p>If this was a mistake or if you change your mind, feel free to resubscribe anytime!</p>
+      <h2>Ci dispiace vederti andare via!</h2>
+      <p>La tua iscrizione è stata annullata con successo. Non riceverai più le nostre newsletter e offerte.</p>
+      <p>Se si è trattato di un errore o se cambi idea, puoi riscriverti in qualsiasi momento!</p>
     </div>
     <div class="footer">
-      <p>&copy; 2024 BurgerCasa. All rights reserved.</p>
+      <p>&copy; 2024 BurgerCasa. Tutti i diritti riservati.</p>
     </div>
   </div>
 </body>
 </html>
+
 `;
 
         return html;
@@ -399,7 +402,7 @@ export class EmailSubscriptionService {
 
       const html = `
         <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -470,19 +473,20 @@ export class EmailSubscriptionService {
 <body>
   <div class="container">
     <div class="header">
-      <h1>Error Cancelling Subscription</h1>
+      <h1>Errore nella cancellazione dell'iscrizione</h1>
     </div>
     <div class="content">
-      <h2>Oops! Something went wrong.</h2>
-      <p>We couldn't process your cancellation at this time. Please try again later.</p>
-      <p>If the problem persists, feel free to contact our support team for assistance.</p>
+      <h2>Ops! Qualcosa è andato storto.</h2>
+      <p>Non siamo riusciti a processare la tua cancellazione in questo momento. Per favore, riprova più tardi.</p>
+      <p>Se il problema persiste, non esitare a contattare il nostro team di supporto per assistenza.</p>
     </div>
     <div class="footer">
-      <p>&copy; 2024 Your BurgerCasa Name. All rights reserved.</p>
+      <p>&copy; 2024 BurgerCasa. Tutti i diritti riservati.</p>
     </div>
   </div>
 </body>
 </html>
+
 
       `;
 

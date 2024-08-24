@@ -53,50 +53,59 @@ export class CommandeService {
         subject: 'Order Verification',
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
-            <h2 style="text-align: center; color: #4CAF50;">Thank You for Your Order!</h2>
-            <p style="font-size: 16px; color: #333;">Dear ${response.nom_client},</p>
-            <p style="font-size: 16px; color: #333;">We appreciate your order and are excited to serve you. Please verify your order by clicking the link below:</p>
-            <p style="text-align: center;">
-              <a href="${verificationUrl}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #4CAF50; text-decoration: none; border-radius: 5px;">Verify Order</a>
-            </p>
-            <h3 style="color: #4CAF50;">Order Details</h3>
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">Order Total:</td>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.total}&#8364;</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">Client Name:</td>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.nom_client}</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">Phone Number:</td>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.tel_client}</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">Address:</td>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.adresse}</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">Order Content:</td>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.content}</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">Order Type:</td>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.order_type}</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">Special Request:</td>
-                <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.special_request}</td>
-              </tr>
-            </table>
-            <p style="font-size: 16px; color: #333;">If this is not your order and you wish to cancel it, please click the link below:</p>
-            <p style="text-align: center;">
-              <a href="${URL}commandes/cancel-order?token=${token}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF0000; text-decoration: none; border-radius: 5px;">Cancel Order</a>
-            </p>
-            <p style="font-size: 16px; color: #333;">If you have any questions, feel free to contact us at any time.</p>
-            <p style="font-size: 16px; color: #333;">Best regards,<br>BurgerCasa</p>
-          </div>
+  <h2 style="text-align: center; color: #4CAF50;">Grazie per il tuo ordine!</h2>
+  <p style="font-size: 16px; color: #333;">Caro ${response.nom_client},</p>
+  <p style="font-size: 16px; color: #333;">Apprezziamo il tuo ordine e siamo entusiasti di servirti. Si prega di verificare il tuo ordine cliccando sul link qui sotto:</p>
+  <p style="text-align: center;">
+    <a href="${verificationUrl}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #4CAF50; text-decoration: none; border-radius: 5px;">Verifica Ordine</a>
+  </p>
+  <h3 style="color: #4CAF50;">Dettagli dell'Ordine</h3>
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">Totale Ordine:</td>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.total}&#8364;</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">Nome Cliente:</td>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.nom_client}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">Numero di Telefono:</td>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.tel_client}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">Indirizzo:</td>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.adresse}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">Contenuto dell'Ordine:</td>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.content}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">Tipo di Ordine:</td>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.order_type}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">Richiesta Speciale:</td>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">${response.special_request}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">Data di Creazione:</td>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">${formatDate(response.data_creation)}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">Orario Preferito:</td>
+      <td style="padding: 10px; border: 1px solid #e0e0e0;">${formatDate(response.prefered_time)}</td>
+    </tr>
+  </table>
+  <p style="font-size: 16px; color: #333;">Se questo non è il tuo ordine e desideri annullarlo, clicca sul link qui sotto:</p>
+  <p style="text-align: center;">
+    <a href="${URL}commandes/cancel-order?token=${token}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF0000; text-decoration: none; border-radius: 5px;">Annulla Ordine</a>
+  </p>
+  <p style="font-size: 16px; color: #333;">Se hai domande, non esitare a contattarci in qualsiasi momento.</p>
+  <p style="font-size: 16px; color: #333;">Cordiali saluti,<br>BurgerCasa</p>
+</div>
+
         `,
       };
 
@@ -118,7 +127,7 @@ export class CommandeService {
     }
   }
 
-  async verifyToken(token: string): Promise<string> {
+  async verifyToken(token: string): Promise<any> {
     try {
       const payLoad = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
@@ -135,7 +144,7 @@ export class CommandeService {
 
         // Send WhatsApp notification
         const url = `https://graph.facebook.com/v20.0/${process.env.FACEBOOK_ACCOUNT_ID}/messages`;
-        const message = `New Order:\n- Name: ${response.nom_client}\n- Phone: ${response.tel_client}\n- Address: ${response.adresse}\n- Order: \n${response.content}\n- Order Type: ${response.order_type}\n- Total: ${response.total}€\n- State: ${response.status}\n- Order ID: ${response.id}\n- Special Request: ${response.special_request}\n- Creation Date: ${formatDate(response.data_creation)}`;
+        const message = `Nuovo Ordine:\n- Nome: ${response.nom_client}\n- Telefono: ${response.tel_client}\n- Indirizzo: ${response.adresse}\n- Ordine: \n${response.content}\n- Tipo di Ordine: ${response.order_type}\n- Totale: ${response.total}€\n- Stato: ${response.status}\n- ID Ordine: ${response.id}\n- Richiesta Speciale: ${response.special_request}\n- Data di Creazione: ${formatDate(response.data_creation)}\n- Orario Preferito: ${formatDate(response.prefered_time)}`;
 
         const payload = {
           messaging_product: 'whatsapp',
@@ -165,132 +174,137 @@ export class CommandeService {
 
         await this.commandeRepository.update(
           { id: payLoad.id },
-          { status: 'Verified, Waiting to be Prepared' },
+          { status: 'Verificato, in attesa di essere preparato' },
         );
 
         let html = `
         <html>
-          <head>
-            <title>BurgerCasa: Order Verified</title>
-            <style>
-              body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-              .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
-              h1 { color: #4CAF50; }
-              p { font-size: 16px; color: #333; }
-              table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-              th, td { padding: 10px; border: 1px solid #ddd; }
-              th { background-color: #f4f4f4; }
-              .button { display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #4CAF50; text-decoration: none; border-radius: 5px; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h1>Order Verified Successfully!</h1>
-              <p>Dear ${response.nom_client},</p>
-              <p>Your order has been successfully verified. Here are the details:</p>
-              <table>
-                <tr>
-                  <th>Order Total:</th>
-                  <td>${response.total}&#8364;</td>
-                </tr>
-                <tr>
-                  <th>Client Name:</th>
-                  <td>${response.nom_client}</td>
-                </tr>
-                <tr>
-                  <th>Phone Number:</th>
-                  <td>${response.tel_client}</td>
-                </tr>
-                <tr>
-                  <th>Address:</th>
-                  <td>${response.adresse}</td>
-                </tr>
-                <tr>
-                  <th>Order Content:</th>
-                  <td>${response.content}</td>
-                </tr>
-                <tr>
-                  <th>Order ID:</th>
-                  <td>${response.id}</td>
-                </tr>
-                <tr>
-                  <th>Order Type:</th>
-                  <td>${response.order_type}</td>
-                </tr>
-                <tr>
-                  <th>Special Request:</th>
-                  <td>${response.special_request}</td>
-                </tr>
-                <tr>
-                  <th>Creation Date:</th>
-                  <td>${formatDate(response.data_creation)}</td>
-                </tr>
-              </table>
-              <p>We are preparing your order and will notify you once it’s ready. Thank you for choosing our BurgerCasa!</p>
-              <p>Best regards,<br>BurgerCasa</p>
-            </div>
-          </body>
-        </html>
-      `;
+  <head>
+    <title>BurgerCasa: Ordine Verificato</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+      .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+      h1 { color: #4CAF50; }
+      p { font-size: 16px; color: #333; }
+      table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+      th, td { padding: 10px; border: 1px solid #ddd; }
+      th { background-color: #f4f4f4; }
+      .button { display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #4CAF50; text-decoration: none; border-radius: 5px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ordine Verificato con Successo!</h1>
+      <p>Caro/a ${response.nom_client},</p>
+      <p>Il tuo ordine è stato verificato con successo. Ecco i dettagli:</p>
+      <table>
+        <tr>
+          <th>Totale Ordine:</th>
+          <td>${response.total}&#8364;</td>
+        </tr>
+        <tr>
+          <th>Nome del Cliente:</th>
+          <td>${response.nom_client}</td>
+        </tr>
+        <tr>
+          <th>Numero di Telefono:</th>
+          <td>${response.tel_client}</td>
+        </tr>
+        <tr>
+          <th>Indirizzo:</th>
+          <td>${response.adresse}</td>
+        </tr>
+        <tr>
+          <th>Contenuto dell'Ordine:</th>
+          <td>${response.content}</td>
+        </tr>
+        <tr>
+          <th>ID Ordine:</th>
+          <td>${response.id}</td>
+        </tr>
+        <tr>
+          <th>Tipo di Ordine:</th>
+          <td>${response.order_type}</td>
+        </tr>
+        <tr>
+          <th>Richiesta Speciale:</th>
+          <td>${response.special_request}</td>
+        </tr>
+        <tr>
+          <th>Data di Creazione:</th>
+          <td>${formatDate(response.data_creation)}</td>
+        </tr>
+        <tr>
+          <th>Orario Preferito:</th>
+          <td>${formatDate(response.prefered_time)}</td>
+        </tr>
+      </table>
+      <p>Stiamo preparando il tuo ordine e ti avviseremo non appena sarà pronto. Grazie per aver scelto BurgerCasa!</p>
+      <p>Cordiali saluti,<br>BurgerCasa</p>
+    </div>
+  </body>
+</html>
 
-        console.log('test1');
+      `;
 
         return html;
       } else {
-        if (orderToUpdate.status === 'Verified, Waiting to be Prepared') {
+        if (orderToUpdate.status === 'Verificato, in attesa di essere preparato') {
           const response = await this.commandeRepository.findOne({
             where: { id: payLoad.id },
           });
           let html = `
           <html>
-            <head>
-              <title>BurgerCasa: Error</title>
-              <style>
-                body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-                .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
-                h1 { color: #FF0000; }
-                p { font-size: 16px; color: #333; }
-                .button { display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF0000; text-decoration: none; border-radius: 5px; }
-              </style>
-            </head>
-            <body>
-              <div class="container">
-                <h1>Order Already Verified</h1>
-                <p>Dear ${response.nom_client},</p>
-                <p>Your order has already been verified. Please wait for the preparation of your order.</p>
-                <p>Best regards,<br>BurgerCasa</p>
-              </div>
-            </body>
-          </html>
+  <head>
+    <title>BurgerCasa: Errore</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+      .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+      h1 { color: #FF0000; }
+      p { font-size: 16px; color: #333; }
+      .button { display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF0000; text-decoration: none; border-radius: 5px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ordine Già Verificato</h1>
+      <p>Caro/a ${response.nom_client},</p>
+      <p>Il tuo ordine è già stato verificato. Attendi la preparazione del tuo ordine.</p>
+      <p>Cordiali saluti,<br>BurgerCasa</p>
+    </div>
+  </body>
+</html>
+
         `;
 
           return html;
         } else {
-          if (orderToUpdate.status === 'Canceled') {
+          if (orderToUpdate.status === 'Annullato') {
             const response = await this.commandeRepository.findOne({
               where: { id: payLoad.id },
             });
             let html = `
             <html>
-              <head>
-                <title>BurgerCasa: Cancel Order</title>
-                <style>
-                  body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-                  .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
-                  h1 { color: #FF0000; }
-                  p { font-size: 16px; color: #333; }
-                  .button { display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF0000; text-decoration: none; border-radius: 5px; }
-                </style>
-              </head>
-              <body>
-                <div class="container">
-                  <h1>Order Canceled</h1>
-                  <p>Dear ${response.nom_client},</p>
-                  <p>Your order has been canceled.</p>
-                  <p>Best regards,<br>BurgerCasa</p>
-                </div>
-              </body>
-            </html>
+  <head>
+    <title>BurgerCasa: Annulla Ordine</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+      .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+      h1 { color: #FF0000; }
+      p { font-size: 16px; color: #333; }
+      .button { display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF0000; text-decoration: none; border-radius: 5px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ordine Annullato</h1>
+      <p>Caro/a ${response.nom_client},</p>
+      <p>Il tuo ordine è stato annullato.</p>
+      <p>Cordiali saluti,<br>BurgerCasa</p>
+    </div>
+  </body>
+</html>
+
           `;
 
             return html;
@@ -321,25 +335,26 @@ export class CommandeService {
 
         html = `
           <html>
-            <head>
-              <title>BurgerCasa: Token Expired</title>
-              <style>
-                body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-                .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
-                h1 { color: #FF0000; }
-                p { font-size: 16px; color: #333; }
-                .button { display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF0000; text-decoration: none; border-radius: 5px; }
-              </style>
-            </head>
-            <body>
-              <div class="container">
-                <h1>Verification Token Expired</h1>
-                <p>Dear ${response.nom_client},</p>
-                <p>Your verification token has expired. Please request a new order.</p>
-                <p>Best regards,<br>BurgerCasa</p>
-              </div>
-            </body>
-          </html>
+  <head>
+    <title>BurgerCasa: Token Scaduto</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+      .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+      h1 { color: #FF0000; }
+      p { font-size: 16px; color: #333; }
+      .button { display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF0000; text-decoration: none; border-radius: 5px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Token di Verifica Scaduto</h1>
+      <p>Caro/a ${response.nom_client},</p>
+      <p>Il tuo token di verifica è scaduto. Per favore, richiedi un nuovo ordine.</p>
+      <p>Cordiali saluti,<br>BurgerCasa</p>
+    </div>
+  </body>
+</html>
+
         `;
 
         console.log('test3');
@@ -351,23 +366,24 @@ export class CommandeService {
 
       html = `
         <html>
-          <head>
-              <title>BurgerCasa: Error</title>
-            <style>
-              body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-              .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
-              h1 { color: #FF0000; }
-              p { font-size: 16px; color: #333; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h1>Order Verification Failed</h1>
-              <p>There was an error verifying your order. Please try again later or contact support if the issue persists.</p>
-              <p>Best regards,<br>BurgerCasa</p>
-            </div>
-          </body>
-        </html>
+  <head>
+    <title>BurgerCasa: Errore</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+      .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+      h1 { color: #FF0000; }
+      p { font-size: 16px; color: #333; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Verifica Ordine Fallita</h1>
+      <p>C'è stato un errore nella verifica del tuo ordine. Riprova più tardi o contatta il supporto se il problema persiste.</p>
+      <p>Cordiali saluti,<br>BurgerCasa</p>
+    </div>
+  </body>
+</html>
+
       `;
 
       console.log('test2');
@@ -387,10 +403,10 @@ export class CommandeService {
       if (orderToUpdate.status === 'Waiting to be Verified...') {
         await this.commandeRepository.update(
           { id: payLoad.id },
-          { status: 'Canceled' },
+          { status: 'Annullato' },
         );
       } else {
-        if (orderToUpdate.status === 'Canceled') {
+        if (orderToUpdate.status === 'Annullato') {
           throw new Error('Order not found or already canceled.');
         }
         throw new Error('Order has already been verified.');
@@ -404,68 +420,73 @@ export class CommandeService {
 
       const html = `
       <html>
-        <head>
-          <title>BurgerCasa: Order Canceled</title>
-          <style>
-            body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-            .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9; }
-            h1 { color: #FF5722; }
-            p { font-size: 16px; color: #333; }
-            table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-            th, td { padding: 10px; border: 1px solid #ddd; }
-            th { background-color: #f4f4f4; }
-            .button { display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF5722; text-decoration: none; border-radius: 5px; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <h1>Order Canceled Successfully</h1>
-            <p>Dear ${response.nom_client},</p>
-            <p>Your order has been successfully canceled. Here are the details of the canceled order:</p>
-            <table>
-              <tr>
-                <th>Order Total:</th>
-                <td>${response.total}&#8364;</td>
-              </tr>
-              <tr>
-                <th>Client Name:</th>
-                <td>${response.nom_client}</td>
-              </tr>
-              <tr>
-                <th>Phone Number:</th>
-                <td>${response.tel_client}</td>
-              </tr>
-              <tr>
-                <th>Phone Number:</th>
-                <td>${response.email_client}</td>
-              </tr>
-              <tr>
-                <th>Address:</th>
-                <td>${response.adresse}</td>
-              </tr>
-              <tr>
-                <th>Order Content:</th>
-                <td>${response.content}</td>
-              </tr>
-              <tr>
-                <th>Order ID:</th>
-                <td>${response.id}</td>
-              </tr>
-              <tr>
-                <th>Special Request:</th>
-                <td>${response.special_request}</td>
-              </tr>
-              <tr>
-                <th>Creation Date:</th>
-                <td>${formatDate(response.data_creation)}</td>
-              </tr>
-            </table>
-            <p>If you have any questions or need further assistance, please contact us at [Your Contact Information].</p>
-            <p>Thank you for choosing our BurgerCasa!</p>
-            <p>Best regards,<br>BurgerCasa</p>
-          </div>
-        </body>
-      </html>
+<head>
+  <title>BurgerCasa: Ordine Annullato</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+    .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9; }
+    h1 { color: #FF5722; }
+    p { font-size: 16px; color: #333; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; border: 1px solid #ddd; }
+    th { background-color: #f4f4f4; }
+    .button { display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #FF5722; text-decoration: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ordine Annullato con Successo</h1>
+    <p>Caro ${response.nom_client},</p>
+    <p>Il tuo ordine è stato annullato con successo. Ecco i dettagli dell'ordine annullato:</p>
+    <table>
+      <tr>
+        <th>Totale Ordine:</th>
+        <td>${response.total}&#8364;</td>
+      </tr>
+      <tr>
+        <th>Nome Cliente:</th>
+        <td>${response.nom_client}</td>
+      </tr>
+      <tr>
+        <th>Numero di Telefono:</th>
+        <td>${response.tel_client}</td>
+      </tr>
+      <tr>
+        <th>Email Cliente:</th>
+        <td>${response.email_client}</td>
+      </tr>
+      <tr>
+        <th>Indirizzo:</th>
+        <td>${response.adresse}</td>
+      </tr>
+      <tr>
+        <th>Contenuto dell'Ordine:</th>
+        <td>${response.content}</td>
+      </tr>
+      <tr>
+        <th>ID Ordine:</th>
+        <td>${response.id}</td>
+      </tr>
+      <tr>
+        <th>Richiesta Speciale:</th>
+        <td>${response.special_request}</td>
+      </tr>
+      <tr>
+        <th>Data di Creazione:</th>
+        <td>${formatDate(response.data_creation)}</td>
+      </tr>
+      <tr>
+        <th>Orario Preferito:</th>
+        <td>${formatDate(response.prefered_time)}</td>
+      </tr>
+    </table>
+    <p>Se hai domande o hai bisogno di ulteriore assistenza, contattaci al +39 375 693 3442.</p>
+    <p>Grazie per aver scelto BurgerCasa!</p>
+    <p>Cordiali saluti,<br>BurgerCasa</p>
+  </div>
+</body>
+</html>
+
     `;
 
       return html;
@@ -477,73 +498,73 @@ export class CommandeService {
       if (error.message.includes('already canceled')) {
         html = `
         <html>
-          <head>
-              <title>BurgerCasa: Cancel Failed</title>
+<head>
+  <title>BurgerCasa: Annullamento Fallito</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+    .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9; }
+    h1 { color: #FF5722; }
+    p { font-size: 16px; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Annullamento dell'Ordine Fallito</h1>
+    <p>Caro Cliente,</p>
+    <p>Non siamo riusciti a elaborare l'annullamento del tuo ordine. Potrebbe essere già stato annullato o non esistere.</p>
+    <p>Contattaci se pensi che questo sia un errore o se hai bisogno di ulteriore assistenza.</p>
+    <p>Cordiali saluti,<br>BurgerCasa</p>
+  </div>
+</body>
+</html>
 
-            <style>
-              body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-              .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9; }
-              h1 { color: #FF5722; }
-              p { font-size: 16px; color: #333; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h1>Order Cancellation Failed</h1>
-              <p>Dear Customer,</p>
-              <p>We could not process the cancellation of your order. It may have already been canceled or does not exist.</p>
-              <p>Please contact us if you believe this is an error or need further assistance.</p>
-              <p>Best regards,<br>BurgerCasa</p>
-            </div>
-          </body>
-        </html>
       `;
       } else if (error.message.includes('already been verified')) {
         html = `
         <html>
-          <head>
-              <title>BurgerCasa: Order Verified</title>
+<head>
+  <title>BurgerCasa: Ordine Verificato</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+    .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9; }
+    h1 { color: #FF5722; }
+    p { font-size: 16px; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ordine Già Verificato</h1>
+    <p>Caro Cliente,</p>
+    <p>L'ordine che stai tentando di annullare è già stato verificato e non può essere annullato a questo punto.</p>
+    <p>Se hai ulteriori domande o hai bisogno di assistenza, contattaci.</p>
+    <p>Cordiali saluti,<br>BurgerCasa</p>
+  </div>
+</body>
+</html>
 
-            <style>
-              body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-              .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9; }
-              h1 { color: #FF5722; }
-              p { font-size: 16px; color: #333; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h1>Order Already Verified</h1>
-              <p>Dear Customer,</p>
-              <p>The order you are trying to cancel has already been verified and cannot be canceled at this stage.</p>
-              <p>If you have any further questions or need assistance, please contact us.</p>
-              <p>Best regards,<br>BurgerCasa</p>
-            </div>
-          </body>
-        </html>
       `;
       } else {
         html = `
         <html>
-          <head>
-              <title>BurgerCasa: Error</title>
+<head>
+  <title>BurgerCasa: Errore</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+    .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9; }
+    h1 { color: #FF5722; }
+    p { font-size: 16px; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Annullamento dell'Ordine Fallito</h1>
+    <p>Caro Cliente,</p>
+    <p>Si è verificato un errore durante l'elaborazione della tua richiesta di annullamento. Riprova più tardi o contatta il supporto per assistenza.</p>
+    <p>Cordiali saluti,<br>BurgerCasa</p>
+  </div>
+</body>
+</html>
 
-            <style>
-              body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-              .container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9; }
-              h1 { color: #FF5722; }
-              p { font-size: 16px; color: #333; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h1>Order Cancellation Failed</h1>
-              <p>Dear Customer,</p>
-              <p>There was an error while processing your cancellation request. Please try again later or contact support for assistance.</p>
-              <p>Best regards,<br>BurgerCasa</p>
-            </div>
-          </body>
-        </html>
       `;
       }
 

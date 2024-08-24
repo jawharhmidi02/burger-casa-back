@@ -47,26 +47,26 @@ export class WebHookService {
 
             let newStatus: string;
             switch (keyword) {
-              case 'start':
-                newStatus = 'In Progress';
+              case 'inizia':
+                newStatus = 'In Corso';
                 break;
-              case 'ready':
-                newStatus = 'Prepared';
+              case 'pronto':
+                newStatus = 'Preparato';
                 break;
-              case 'out':
-                newStatus = 'Out for Delivery';
+              case 'uscito':
+                newStatus = 'In Consegna';
                 break;
-              case 'picked':
-                newStatus = 'Picked Up';
+              case 'ritirato':
+                newStatus = 'Ritirato';
                 break;
-              case 'delivered':
-                newStatus = 'Delivered';
+              case 'consegnato':
+                newStatus = 'Consegnato';
                 break;
-              case 'cancel':
-                newStatus = 'Cancelled';
+              case 'annulla':
+                newStatus = 'Annullato';
                 break;
               default:
-                console.log('Unknown keyword received');
+                console.log('Unknown State');
                 return;
             }
 
@@ -77,17 +77,18 @@ export class WebHookService {
               WHATSAPP_API_KEY,
             );
 
-            const content = `New Order:\n- Name: ${
-              response.nom_client
-            }\n- Phone: ${response.tel_client}\n- Address: ${
-              response.adresse
-            }\n- Order: \n${response.content}\n- Order Type: ${
-              response.order_type
-            }\n- Total: ${response.total}€\n- State: ${
-              response.status
-            }\n- Order ID: ${response.id}\n- Special Request: ${
-              response.special_request
-            }\n- Creation Date: ${formatDate(response.data_creation)}`;
+            // const content = `New Order:\n- Name: ${
+            //   response.nom_client
+            // }\n- Phone: ${response.tel_client}\n- Address: ${
+            //   response.adresse
+            // }\n- Order: \n${response.content}\n- Order Type: ${
+            //   response.order_type
+            // }\n- Total: ${response.total}€\n- State: ${
+            //   response.status
+            // }\n- Order ID: ${response.id}\n- Special Request: ${
+            //   response.special_request
+            // }\n- Creation Date: ${formatDate(response.data_creation)}`;
+            const content = `Nuovo Ordine:\n- Nome: ${response.nom_client}\n- Telefono: ${response.tel_client}\n- Indirizzo: ${response.adresse}\n- Ordine: \n${response.content}\n- Tipo di Ordine: ${response.order_type}\n- Totale: ${response.total}€\n- Stato: ${response.status}\n- ID Ordine: ${response.id}\n- Richiesta Speciale: ${response.special_request}\n- Data di Creazione: ${formatDate(response.data_creation)}\n- Orario Preferito: ${formatDate(response.prefered_time)}`;
 
             const whatsappResponse = await axios({
               method: 'POST',
