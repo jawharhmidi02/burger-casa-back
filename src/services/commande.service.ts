@@ -137,7 +137,7 @@ export class CommandeService {
         where: { id: payLoad.id },
       });
 
-      if (orderToUpdate.status === 'Waiting to be Verified...') {
+      if (orderToUpdate.status === 'In attesa di essere Verificato...') {
         const response = await this.commandeRepository.findOne({
           where: { id: payLoad.id },
         });
@@ -325,7 +325,7 @@ export class CommandeService {
         console.log('Token has expired');
 
         await this.commandeRepository.update(
-          { id: payLoadError.id, status: 'Waiting to be Verified...' },
+          { id: payLoadError.id, status: 'In attesa di essere Verificato...' },
           { status: 'Verification Expired' },
         );
 
@@ -400,7 +400,7 @@ export class CommandeService {
         where: { id: payLoad.id },
       });
 
-      if (orderToUpdate.status === 'Waiting to be Verified...') {
+      if (orderToUpdate.status === 'In attesa di essere Verificato...') {
         await this.commandeRepository.update(
           { id: payLoad.id },
           { status: 'Annullato' },
