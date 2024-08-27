@@ -20,8 +20,14 @@ export class OrganisateurController {
   @Post('/signup/')
   create(
     @Body() organisateur: OrganisateurToEntity,
+    @Headers('access_token') access_token?: string,
+    @Headers('pass_code') pass_code?: string,
   ): Promise<OrganisateurFromEntity> {
-    return this.organisateurService.signup(organisateur);
+    return this.organisateurService.signup(
+      organisateur,
+      access_token,
+      pass_code,
+    );
   }
 
   @Post('/signin/')

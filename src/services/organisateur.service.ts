@@ -53,8 +53,39 @@ export class OrganisateurService {
 
   async signup(
     organisateur: OrganisateurToEntity,
+    access_token: string,
+    pass_code: string,
   ): Promise<OrganisateurFromEntity> {
     try {
+      if (access_token) {
+        const payLoad = await this.jwtService.verifyAsync(access_token, {
+          secret: jwtConstants.secret,
+        });
+
+        if (payLoad.role == undefined) {
+          return null;
+        }
+
+        if (payLoad.role != 'admin') {
+          return null;
+        }
+
+        const account = await this.organisateurRepository.findOne({
+          where: { id: payLoad.id },
+        });
+
+        if (!account || account.nonce != payLoad.nonce) {
+          return null;
+        }
+      } else {
+        if (pass_code) {
+          if (process.env.PASS_CODE !== pass_code) {
+            return null;
+          }
+        } else {
+          return null;
+        }
+      }
       organisateur.password = encrypt(organisateur.password);
       const response = await this.organisateurRepository.save(organisateur);
       const data = new OrganisateurFromEntity(response);
@@ -207,7 +238,7 @@ If you didn't request this, please ignore this message.
         const whatsappResponse = await lastValueFrom(
           this.httpService.post(url, payload, { headers }),
         );
-        
+
         return true;
       }
 
